@@ -2,7 +2,7 @@
 
 <img src="docs/assets/icon-animated.svg" width="144" height="144" alt="Room to Speak icon: a kettle lit inside a terracotta ring">
 
-# Room to Speak
+# Room to Speak 🏠💬
 
 **One photo of his room becomes a voice he can tap.**
 
@@ -10,10 +10,17 @@
 
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="On a tablet, a living room photo dims while the kettle stays lit inside its terracotta ring and says “Aku mau kopi.”">
 
+[![Live app](https://img.shields.io/badge/🚀_Live-roomspeak.edycu.dev-B5532C?style=for-the-badge)](https://roomspeak.edycu.dev)
+[![Story](https://img.shields.io/badge/📖_Story-Landing_page-C8643B?style=for-the-badge)](https://roomspeak.edycu.dev/story/)
+[![Pitch deck](https://img.shields.io/badge/📊_Pitch-Deck-2F2B28?style=for-the-badge)](https://roomspeak.edycu.dev/deck/)
+[![Built for Devpost](https://img.shields.io/badge/Devpost-Build_With_AI:_Basics-003E54?style=for-the-badge&logo=devpost&logoColor=white)](https://learn-ai-basics.devpost.com/)
+[![Release](https://img.shields.io/github/v/release/edycutjong/roomspeak?style=for-the-badge&color=6F665F)](https://github.com/edycutjong/roomspeak/releases)
+
 ![React](https://img.shields.io/badge/React-19-2F2B28?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-2F2B28?logo=vite&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-2F2B28?logo=typescript&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini-vision-B5532C)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-fallback-B5532C)
 ![Web Speech API](https://img.shields.io/badge/Web%20Speech%20API-on--device-B5532C)
 ![License: MIT](https://img.shields.io/badge/License-MIT-6F665F)
 
