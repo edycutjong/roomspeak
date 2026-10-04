@@ -8,6 +8,8 @@
 
 **[Try it live → roomspeak.edycu.dev](https://roomspeak.edycu.dev)**
 
+Judging? [The 30-second path (JUDGE.md)](JUDGE.md) · [A real run, with receipts (DEMO.md)](DEMO.md)
+
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="On a tablet, a living room photo dims while the kettle stays lit inside its terracotta ring and says “Aku mau kopi.”">
 
 [![Live app](https://img.shields.io/badge/🚀_Live-roomspeak.edycu.dev-B5532C?style=for-the-badge)](https://roomspeak.edycu.dev)
@@ -23,6 +25,7 @@
 ![DeepSeek](https://img.shields.io/badge/DeepSeek-fallback-B5532C)
 ![Web Speech API](https://img.shields.io/badge/Web%20Speech%20API-on--device-B5532C)
 ![License: MIT](https://img.shields.io/badge/License-MIT-6F665F)
+[![CI](https://github.com/edycutjong/roomspeak/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/roomspeak/actions/workflows/ci.yml)
 
 </div>
 
@@ -84,14 +87,27 @@ GEMINI_API_KEY=your-key npm run dev        # or put it in .env.local (see .env.e
 
 Use a phone or tablet with an Indonesian voice installed for speech in Bahasa Indonesia (Android Chrome and iOS Safari ship one). English is available at setup.
 
-## ✅ Tests
+## 🧪 Tests & CI
+
+Every command below runs without an API key except the last one, `slice1-detect.mjs`, which makes a real detection call (Gemini, or the DeepSeek fallback). [CI](.github/workflows/ci.yml) runs typecheck → tests → build → browser specs on every push and pull request. [gitleaks](.github/workflows/gitleaks.yml) scans each push for secrets, and the full git history weekly and on demand.
 
 ```bash
-npm test                                            # 17 unit tests: validation, model-JSON parsing, box→ring, hit testing, ring separation, storage
-node e2e/slice2-speak.mjs path/to/room-photo.jpg    # browser checks (dev server running); also slice1–4
+npm run typecheck                                   # tsc -b, strict
+npm test                                            # 25 Vitest tests
+npm run coverage                                    # the same tests, with a v8 coverage report over src/, shared/ and api/
+npm run e2e                                         # build, then 2 Playwright specs on vite preview (detection + voice stubbed)
+BASE_URL=https://roomspeak.edycu.dev npx playwright test   # the same specs against the live site, after a deploy
+node e2e/slice2-speak.mjs path/to/room-photo.jpg    # build-time browser checks on `npm run dev`, detection stubbed; also slice3–5
+node e2e/slice1-detect.mjs path/to/room-photo.jpg   # needs a key: start the dev server with GEMINI_API_KEY (or DEEPSEEK_API_KEY) set
 ```
 
-The four `e2e/` scripts drive the real app in Chromium (34 checks across Speak mode, editing, persistence and failure states); `slice1-detect.mjs` calls the real Gemini API.
+- **17 unit tests:** validation, model-JSON parsing, box → ring, hit testing, ring separation, storage.
+- **3 regression tests, each named for a defect the build hit:** a Gemini timeout escaping the fallback loop ([863498a](https://github.com/edycutjong/roomspeak/commit/863498a)), a 503 "high demand" on the first real call ([6edd9ca](https://github.com/edycutjong/roomspeak/commit/6edd9ca)), and extensionless imports that broke only on Vercel ([cf62a94](https://github.com/edycutjong/roomspeak/commit/cf62a94)). One more covers fenced JSON from the DeepSeek fallback.
+- **1 property test over 100,000 generated model answers:** [fast-check](https://fast-check.dev) builds answers from spots that are valid or invalid by construction. `validateSpots` never returns a box outside 0–1000, a box with min ≥ max, a blank phrase or more than 8 spots, and never drops a valid spot before the cap.
+- **3 no-key checks:** the client is built with canary keys in the environment; the keys, key-shaped strings and the AI providers' URLs appear in no file the browser downloads.
+- **Browser:** 2 Playwright specs in CI (the [`/judge`](JUDGE.md) page, and the 30-second path it prints), plus the 5 `e2e/slice*.mjs` scripts used during the build: 43 checks across Speak mode, editing, persistence, failure states and example rooms. `slice1-detect.mjs` makes a real detection call, so it needs a key with quota left; when detection fails it stops with the server's reason instead of waiting. The other four stub detection.
+
+The real, unstubbed run is [DEMO.md](DEMO.md) (`npm run receipt`).
 
 ## 🛠️ How it was built
 

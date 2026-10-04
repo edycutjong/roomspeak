@@ -1,0 +1,29 @@
+name: gitleaks
+
+# Push and pull-request runs scan the new commits. The weekly run and a manual run
+# (Actions → gitleaks → Run workflow, e.g. right before the repo goes public) scan the whole history.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  scan:
+    name: secrets in git history
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # every commit, so the full-history runs really see the past
+
+      - uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false # findings go to the job summary; commenting would need write access

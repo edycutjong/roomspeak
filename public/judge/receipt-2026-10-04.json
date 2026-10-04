@@ -1,0 +1,550 @@
+{
+ "endpoint": "https://roomspeak.edycu.dev/api/detect",
+ "lang": "id",
+ "encode": "Chromium canvas, ≤1600 px, JPEG 0.85 (same as src/image.ts)",
+ "summary": {
+  "photos": 6,
+  "answered": 6,
+  "p50_s": 4.03,
+  "max_s": 7.38,
+  "by_model": {
+   "gemini-3.8-flash": 1,
+   "gemini-3.1-flash-lite": 5,
+   "deepseek-flash": 0
+  }
+ },
+ "runs": [
+  {
+   "photo": "room-01.png",
+   "size": "1536x1024",
+   "payload_kb": 330,
+   "run_at": "2026-10-04T13:03:16.097Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::7pkwn-1791118996268-227520e16c11",
+   "response": {
+    "spots": [
+     {
+      "label": "Gelas teh",
+      "phrase": "Mau minum tehnya",
+      "box": [
+       614,
+       394,
+       727,
+       445
+      ]
+     },
+     {
+      "label": "Kipas angin",
+      "phrase": "Tolong nyalain kipas anginnya",
+      "box": [
+       269,
+       310,
+       595,
+       413
+      ]
+     },
+     {
+      "label": "TV",
+      "phrase": "Tolong ganti siaran TV dong",
+      "box": [
+       251,
+       509,
+       428,
+       665
+      ]
+     },
+     {
+      "label": "Dispenser air",
+      "phrase": "Minta tolong ambilkan air minum",
+      "box": [
+       230,
+       834,
+       514,
+       924
+      ]
+     },
+     {
+      "label": "Kursi sofa",
+      "phrase": "Mau istirahat di kursi ini",
+      "box": [
+       373,
+       0,
+       938,
+       334
+      ]
+     },
+     {
+      "label": "Koran",
+      "phrase": "Tolong ambilkan koran itu",
+      "box": [
+       623,
+       441,
+       707,
+       589
+      ]
+     },
+     {
+      "label": "Foto keluarga",
+      "phrase": "Kangen sama anak dan cucu",
+      "box": [
+       2,
+       574,
+       166,
+       690
+      ]
+     },
+     {
+      "label": "Jam dinding",
+      "phrase": "Sekarang jam berapa ya?",
+      "box": [
+       0,
+       818,
+       100,
+       894
+      ]
+     }
+    ],
+    "model": "gemini-3.8-flash"
+   },
+   "seconds": 7.38,
+   "model": "gemini-3.8-flash",
+   "ladder_step": 1,
+   "spots": 8
+  },
+  {
+   "photo": "room-02.png",
+   "size": "1536x1024",
+   "payload_kb": 351,
+   "run_at": "2026-10-04T13:03:23.601Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::wq84x-1791119003694-8889fc89e8be",
+   "response": {
+    "spots": [
+     {
+      "label": "tempat tidur",
+      "phrase": "Saya mau istirahat sebentar.",
+      "box": [
+       248,
+       405,
+       997,
+       1000
+      ]
+     },
+     {
+      "label": "kursi",
+      "phrase": "Boleh bantu saya duduk di sini?",
+      "box": [
+       525,
+       67,
+       1000,
+       390
+      ]
+     },
+     {
+      "label": "obat",
+      "phrase": "Sudah waktunya saya minum obat.",
+      "box": [
+       396,
+       266,
+       455,
+       357
+      ]
+     },
+     {
+      "label": "gelas",
+      "phrase": "Boleh minta tolong ambilkan minum?",
+      "box": [
+       365,
+       362,
+       417,
+       393
+      ]
+     },
+     {
+      "label": "radio",
+      "phrase": "Tolong nyalakan radio itu.",
+      "box": [
+       294,
+       310,
+       402,
+       387
+      ]
+     },
+     {
+      "label": "jendela",
+      "phrase": "Tolong buka jendelanya, gerah.",
+      "box": [
+       0,
+       665,
+       311,
+       999
+      ]
+     },
+     {
+      "label": "termos",
+      "phrase": "Tolong tuangkan air hangat.",
+      "box": [
+       255,
+       233,
+       417,
+       287
+      ]
+     }
+    ],
+    "model": "gemini-3.1-flash-lite"
+   },
+   "seconds": 3.49,
+   "model": "gemini-3.1-flash-lite",
+   "ladder_step": 2,
+   "spots": 7
+  },
+  {
+   "photo": "room-03.png",
+   "size": "1536x1024",
+   "payload_kb": 342,
+   "run_at": "2026-10-04T13:03:27.205Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::wrxbn-1791119007298-c681c9ad3c41",
+   "response": {
+    "spots": [
+     {
+      "label": "teko listrik",
+      "phrase": "Saya mau bikin kopi atau teh.",
+      "box": [
+       356,
+       199,
+       475,
+       271
+      ]
+     },
+     {
+      "label": "penanak nasi",
+      "phrase": "Saya lapar, mau makan nasi.",
+      "box": [
+       339,
+       68,
+       503,
+       183
+      ]
+     },
+     {
+      "label": "tudung saji",
+      "phrase": "Apa ada makanan di bawah sini?",
+      "box": [
+       435,
+       532,
+       692,
+       875
+      ]
+     },
+     {
+      "label": "toples kerupuk",
+      "phrase": "Saya mau makan kerupuk.",
+      "box": [
+       382,
+       813,
+       596,
+       921
+      ]
+     },
+     {
+      "label": "kursi",
+      "phrase": "Saya mau duduk istirahat sebentar.",
+      "box": [
+       618,
+       162,
+       998,
+       495
+      ]
+     },
+     {
+      "label": "jendela",
+      "phrase": "Tolong buka jendelanya, udara segar.",
+      "box": [
+       0,
+       835,
+       363,
+       998
+      ]
+     },
+     {
+      "label": "kalender",
+      "phrase": "Hari ini tanggal berapa ya?",
+      "box": [
+       5,
+       190,
+       327,
+       342
+      ]
+     }
+    ],
+    "model": "gemini-3.1-flash-lite"
+   },
+   "seconds": 4.28,
+   "model": "gemini-3.1-flash-lite",
+   "ladder_step": 2,
+   "spots": 7
+  },
+  {
+   "photo": "room-04.png",
+   "size": "1536x1024",
+   "payload_kb": 320,
+   "run_at": "2026-10-04T13:03:31.597Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::5dfjs-1791119011692-a40e94fe7dcb",
+   "response": {
+    "spots": [
+     {
+      "label": "televisi",
+      "phrase": "Tolong nyalakan TV-nya",
+      "box": [
+       37,
+       571,
+       275,
+       789
+      ]
+     },
+     {
+      "label": "kipas angin",
+      "phrase": "Tolong nyalakan kipasnya",
+      "box": [
+       62,
+       294,
+       562,
+       421
+      ]
+     },
+     {
+      "label": "obat",
+      "phrase": "Saya mau minum obat",
+      "box": [
+       573,
+       191,
+       678,
+       236
+      ]
+     },
+     {
+      "label": "gelas",
+      "phrase": "Saya mau minum air",
+      "box": [
+       647,
+       1,
+       793,
+       102
+      ]
+     },
+     {
+      "label": "kasur",
+      "phrase": "Saya mau istirahat dulu",
+      "box": [
+       358,
+       535,
+       1000,
+       1000
+      ]
+     },
+     {
+      "label": "ponsel",
+      "phrase": "Tolong ambilkan HP saya",
+      "box": [
+       655,
+       292,
+       725,
+       405
+      ]
+     },
+     {
+      "label": "lampu meja",
+      "phrase": "Tolong nyalakan lampunya",
+      "box": [
+       45,
+       790,
+       247,
+       876
+      ]
+     }
+    ],
+    "model": "gemini-3.1-flash-lite"
+   },
+   "seconds": 3.38,
+   "model": "gemini-3.1-flash-lite",
+   "ladder_step": 2,
+   "spots": 7
+  },
+  {
+   "photo": "room-05.png",
+   "size": "1536x1024",
+   "payload_kb": 420,
+   "run_at": "2026-10-04T13:03:35.105Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::nsv65-1791119015198-44616f95325c",
+   "response": {
+    "spots": [
+     {
+      "label": "kursi",
+      "phrase": "Saya mau duduk santai",
+      "box": [
+       536,
+       78,
+       1000,
+       518
+      ]
+     },
+     {
+      "label": "cangkir kopi",
+      "phrase": "Saya mau minum kopi",
+      "box": [
+       533,
+       478,
+       588,
+       528
+      ]
+     },
+     {
+      "label": "koran",
+      "phrase": "Saya mau baca koran",
+      "box": [
+       538,
+       523,
+       591,
+       626
+      ]
+     },
+     {
+      "label": "sandal",
+      "phrase": "Saya mau pakai sandal",
+      "box": [
+       746,
+       789,
+       848,
+       906
+      ]
+     },
+     {
+      "label": "sapu",
+      "phrase": "Tolong sapu terasnya",
+      "box": [
+       224,
+       699,
+       744,
+       774
+      ]
+     },
+     {
+      "label": "sangkar burung",
+      "phrase": "Burungnya mau makan",
+      "box": [
+       0,
+       274,
+       239,
+       391
+      ]
+     },
+     {
+      "label": "pintu",
+      "phrase": "Tolong bukakan pintunya",
+      "box": [
+       0,
+       785,
+       723,
+       966
+      ]
+     },
+     {
+      "label": "sepeda motor",
+      "phrase": "Saya mau pergi keluar",
+      "box": [
+       313,
+       0,
+       997,
+       163
+      ]
+     }
+    ],
+    "model": "gemini-3.1-flash-lite"
+   },
+   "seconds": 4.07,
+   "model": "gemini-3.1-flash-lite",
+   "ladder_step": 2,
+   "spots": 8
+  },
+  {
+   "photo": "room-06.png",
+   "size": "1536x1024",
+   "payload_kb": 256,
+   "run_at": "2026-10-04T13:03:39.280Z",
+   "http": 200,
+   "vercel_id": "sin1::iad1::84whz-1791119019376-2863c6754dd3",
+   "response": {
+    "spots": [
+     {
+      "label": "teko",
+      "phrase": "Saya mau minum teh hangat",
+      "box": [
+       348,
+       295,
+       460,
+       371
+      ]
+     },
+     {
+      "label": "kulkas",
+      "phrase": "Saya mau ambil minum dingin",
+      "box": [
+       278,
+       752,
+       974,
+       1000
+      ]
+     },
+     {
+      "label": "jendela",
+      "phrase": "Buka jendela, mau udara segar",
+      "box": [
+       0,
+       523,
+       470,
+       842
+      ]
+     },
+     {
+      "label": "penanak nasi",
+      "phrase": "Saya mau makan nasi",
+      "box": [
+       424,
+       52,
+       614,
+       162
+      ]
+     },
+     {
+      "label": "tabung gas",
+      "phrase": "Tolong nyalakan kompornya",
+      "box": [
+       632,
+       447,
+       812,
+       527
+      ]
+     },
+     {
+      "label": "ember",
+      "phrase": "Tolong ambilkan air",
+      "box": [
+       554,
+       547,
+       770,
+       671
+      ]
+     }
+    ],
+    "model": "gemini-3.1-flash-lite"
+   },
+   "seconds": 3.99,
+   "model": "gemini-3.1-flash-lite",
+   "ladder_step": 2,
+   "spots": 6
+  }
+ ]
+}
