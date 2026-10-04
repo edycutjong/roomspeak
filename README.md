@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/icon-animated.svg" width="96" height="96" alt="Room to Speak icon: a kettle lit inside a terracotta ring">
+<img src="docs/assets/icon-animated.svg" width="144" height="144" alt="Room to Speak icon: a kettle lit inside a terracotta ring">
 
 # Room to Speak
 
@@ -23,7 +23,7 @@
 
 A proof of concept of a **visual scene display**: an AAC tool (augmentative and alternative communication) built from a photo of the user's own surroundings, for adults with **aphasia** after a stroke who understand everything but can't find the words.
 
-1. **Setup (caregiver):** take one photo of the room he spends the day in. Gemini finds up to 8 objects he'd want to talk about and writes a short first-person phrase for each (kettle → “Aku mau kopi”). Rings appear on the photo. The caregiver hears, edits, removes or adds spots.
+1. **Setup (caregiver):** take one photo of the room he spends the day in — or tap one of four example rooms (AI-generated) to try it instantly. Gemini finds up to 8 objects he'd want to talk about and writes a short first-person phrase for each (kettle → “Aku mau kopi”). Rings appear on the photo. The caregiver hears, edits, removes or adds spots.
 2. **Speak (him):** the photo fills the screen. One tap on an object and the device speaks the phrase in his language; the rest of the room dims and the object stays lit inside its ring. A row of core words (Ya / Tidak / Tolong / Sakit / Toilet) is always there.
 3. The scene is saved on the device. Next time, the app opens straight into Speak mode.
 

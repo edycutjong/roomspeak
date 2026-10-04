@@ -20,6 +20,36 @@ type Props = {
   onDone: () => void;
 };
 
+// Example rooms (AI-generated) so anyone can try the app without photographing a room first.
+const SAMPLES = ["bedroom", "living", "dining", "kitchen"] as const;
+
+function SamplePicker({ title, note, labels, onFile }: { title: string; note: string; labels: string[]; onFile: (f: File) => void }) {
+  const [loading, setLoading] = useState<string | null>(null);
+  async function pick(name: string) {
+    setLoading(name);
+    try {
+      const blob = await (await fetch(`/samples/${name}.jpg`)).blob();
+      onFile(new File([blob], `${name}.jpg`, { type: "image/jpeg" }));
+    } finally {
+      setLoading(null);
+    }
+  }
+  return (
+    <section className="samples" aria-labelledby="samples-title">
+      <h2 id="samples-title" className="samples__title">{title}</h2>
+      <div className="samples__grid">
+        {SAMPLES.map((name, i) => (
+          <button key={name} className="sample" onClick={() => pick(name)} disabled={!!loading} data-testid={`sample-${name}`}>
+            <img src={`/samples/${name}-thumb.jpg`} alt="" loading="lazy" width="240" height="160" />
+            <span>{labels[i]}</span>
+          </button>
+        ))}
+      </div>
+      <p className="note">{note}</p>
+    </section>
+  );
+}
+
 function PhotoInput({ label, className, onFile }: { label: string; className: string; onFile: (f: File) => void }) {
   function handle(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -136,6 +166,7 @@ export function SetupScreen({ lang, scene, status, storageFailed, onLang, onPhot
           <p className="setup__welcome">{t.welcome}</p>
           <PhotoInput label={t.pickPhoto} className="btn btn--primary btn--wide" onFile={onPhoto} />
           <p className="note">{t.photoNote}</p>
+          <SamplePicker title={t.samplesTitle} note={t.samplesNote} labels={t.samples.split("|")} onFile={onPhoto} />
         </section>
       )}
 

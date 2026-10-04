@@ -11,7 +11,7 @@ Source: `scope.md > The Unique Kernel`, `scope.md > Who It's For`.
 ## The Core Journey
 Source: `scope.md > The Core Loop`, `scope.md > What "Working" Looks Like`.
 
-1. **First open.** No scene exists yet. The caregiver sees a short welcome line, a language choice (Bahasa Indonesia / English), and one button: "Ambil / pilih foto ruangan" ("Take / choose a room photo").
+1. **First open.** No scene exists yet. The caregiver sees a short welcome line, a language choice (Bahasa Indonesia / English), and one button: "Ambil / pilih foto ruangan" ("Take / choose a room photo"). Below it, four example rooms (AI-generated, labelled as such) let anyone try the app with one tap instead of a photo.
 2. **Photo.** The caregiver takes or uploads one photo of his room. A short note says the photo is sent once to an AI service to find objects, and is otherwise kept only on this device.
 3. **Finding spots.** The photo appears with a calm "Mencari benda…" ("Looking for objects…") indicator. Soft rings then appear one by one on up to 8 objects, each with a first-person phrase.
 4. **Review.** Under the photo is a list: object name, phrase, edit, remove. The caregiver removes wrong spots, edits phrases, and can add a spot the AI missed by tapping the photo and typing a phrase.
@@ -85,6 +85,7 @@ Source: `scope.md > Inspiration & Identity`.
 - **Speak mode:** full-screen photo, always-on core row, instant speech with a ring pulse, press-and-hold exit. *(Agent recommendation, accepted.)*
 - **Look:** calm, warm, off-white and charcoal with a terracotta accent, large rounded type. *(Agent recommendation, accepted.)*
 - **Demo language:** Indonesian voice, English captions in the video. *(Agent recommendation, accepted.)*
+- **Example rooms on first open:** four AI-generated room photos run the same setup flow with one tap. *(Learner request after testing: let people try it without photographing a room.)*
 - **Edge cases** (nothing found, request failure, missing voice, overlap, 12-spot cap): *agent recommendations, accepted under the learner's instruction to proceed on recommendations.*
 
 ## What We're Building
