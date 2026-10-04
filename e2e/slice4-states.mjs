@@ -1,6 +1,6 @@
 // Slice 4: scene survives reload; first open → Setup; failure/empty/voice/replace states.
 import { chromium } from "playwright";
-import { check, spoken, stubDetect, stubSpeech, tapStage } from "./helpers.mjs";
+import { check, dismissHandoff, openRow, spoken, stubDetect, stubSpeech, tapStage } from "./helpers.mjs";
 
 const photo = process.argv[2];
 const browser = await chromium.launch();
@@ -14,10 +14,13 @@ await page.goto("http://localhost:5173");
 check(await page.getByTestId("photo-input").count() === 1 && await page.locator(".setup").isVisible(), "first open shows Setup");
 await page.setInputFiles('[data-testid="photo-input"]', photo);
 await page.getByTestId("spot-row").first().waitFor();
+await openRow(page, 1);
 await page.getByTestId("spot-row").nth(1).getByRole("button", { name: "Hapus" }).click();
 await page.getByRole("button", { name: "Selesai" }).click();
+await dismissHandoff(page);
 await page.reload();
 check(await page.locator(".speak").isVisible(), "reopening goes straight to Speak");
+check(!(await page.getByRole("dialog").isVisible()), "the handoff card is shown only once");
 check((await page.getByTestId("ring").count()) === 2, "the saved scene keeps the edited spots");
 await tapStage(page, 0.59, 0.475);
 check((await spoken(page)).at(-1) === "Tolong hangatkan makanan", "a saved ring still speaks after reopening");

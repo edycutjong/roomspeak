@@ -1,6 +1,6 @@
 // Slice 3: hear, edit, remove, add spot, 12-spot cap.
 import { chromium } from "playwright";
-import { FIXTURE_SPOTS, check, spoken, stubDetect, stubSpeech, tapStage } from "./helpers.mjs";
+import { FIXTURE_SPOTS, check, dismissHandoff, openRow, spoken, stubDetect, stubSpeech, tapStage } from "./helpers.mjs";
 
 const photo = process.argv[2];
 const browser = await chromium.launch();
@@ -13,19 +13,26 @@ const rows = page.getByTestId("spot-row");
 await rows.first().waitFor();
 const rings = () => page.getByTestId("ring").count();
 
-await rows.nth(0).getByRole("button", { name: "Dengar" }).click();
-check((await spoken(page)).at(-1) === "Tolong hangatkan makanan", "Dengar speaks the spot");
+await openRow(page, 0);
+check((await spoken(page)).at(-1) === "Tolong hangatkan makanan", "tapping a row speaks the spot");
+check(await rows.nth(0).getByRole("button", { name: "Hapus" }).isVisible(), "tapping a row reveals its actions");
 
 await tapStage(page, 0.59, 0.475);
 check((await spoken(page)).length === 2, "tapping a ring in Setup speaks it");
 
+await openRow(page, 2);
 await rows.nth(2).getByRole("button", { name: "Hapus" }).click();
 check((await rows.count()) === 2 && (await rings()) === 2, "Hapus removes the row and its ring");
+await page.getByRole("button", { name: "Urungkan" }).click();
+check((await rows.count()) === 3, "Urungkan brings the spot back");
+await openRow(page, 2);
+await rows.nth(2).getByRole("button", { name: "Hapus" }).click();
 
+await openRow(page, 0);
 await rows.nth(0).getByRole("button", { name: "Ubah" }).click();
 await rows.nth(0).locator("input").fill("Aku lapar, tolong panaskan");
 await rows.nth(0).getByRole("button", { name: "Simpan" }).click();
-await rows.nth(0).getByRole("button", { name: "Dengar" }).click();
+await openRow(page, 0);
 check((await spoken(page)).at(-1) === "Aku lapar, tolong panaskan", "an edited phrase is what gets spoken");
 
 await page.getByTestId("add-spot").click();
@@ -36,6 +43,7 @@ check((await rings()) === 3 && (await rows.nth(2).textContent()).includes("Ambil
 await page.screenshot({ path: "/tmp/claude-501/rs-slice3.png", fullPage: true });
 
 await page.getByRole("button", { name: "Selesai" }).click();
+await dismissHandoff(page);
 await tapStage(page, 0.62, 0.62);
 check((await spoken(page)).at(-1) === "Ambilkan selimutku", "the added spot speaks in Speak mode");
 

@@ -4,7 +4,7 @@ import { SetupScreen, type SetupStatus } from "./components/SetupScreen";
 import { SpeakScreen } from "./components/SpeakScreen";
 import { detectSpots } from "./detect-client";
 import { preparePhoto } from "./image";
-import { boxToSpot, loadScene, saveScene, type Scene } from "./scene";
+import { boxToSpot, handoffSeen, loadScene, markHandoffSeen, saveScene, separateSpots, type Scene } from "./scene";
 
 export default function App() {
   const [saved] = useState(loadScene);
@@ -13,6 +13,7 @@ export default function App() {
   const [status, setStatus] = useState<SetupStatus>(saved ? "ready" : "idle");
   const [mode, setMode] = useState<"setup" | "speak">(saved ? "speak" : "setup");
   const [storageFailed, setStorageFailed] = useState(false);
+  const [showHandoff, setShowHandoff] = useState(false);
   const lastPhoto = useRef<{ base64: string; aspect: number } | null>(null);
   const run = useRef(0);
 
@@ -24,7 +25,7 @@ export default function App() {
     try {
       const found = await detectSpots(photo.base64, lang);
       if (mine !== run.current) return;
-      setScene((s) => s && { ...s, spots: found.map((d) => boxToSpot(d.box, d.label, d.phrase, photo.aspect)) });
+      setScene((s) => s && { ...s, spots: separateSpots(found.map((d) => boxToSpot(d.box, d.label, d.phrase, photo.aspect)), photo.aspect) });
       setStatus("ready");
     } catch {
       if (mine === run.current) setStatus("failed");
@@ -44,10 +45,22 @@ export default function App() {
       setStorageFailed(true); // say it once; a second Done continues with the in-memory scene
       return;
     }
+    setShowHandoff(!handoffSeen());
     setMode("speak");
   }
 
-  if (mode === "speak" && scene) return <SpeakScreen scene={scene} onExit={() => setMode("setup")} />;
+  if (mode === "speak" && scene)
+    return (
+      <SpeakScreen
+        scene={scene}
+        showHandoff={showHandoff}
+        onHandoffSeen={() => {
+          markHandoffSeen();
+          setShowHandoff(false);
+        }}
+        onExit={() => setMode("setup")}
+      />
+    );
 
   return (
     <SetupScreen

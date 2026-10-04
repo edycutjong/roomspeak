@@ -28,7 +28,52 @@ export function boxToSpot(box: Box, label: string, phrase: string, aspect: numbe
   return { id: newId(), label, phrase, x: (xmin + xmax) / 2, y: (ymin + ymax) / 2, r, source: "ai" };
 }
 
+// Nudges AI rings apart so overlapping ones stay reachable; never moves a ring more than `maxShift`.
+// Works in photo-width units (y is scaled by the aspect so distances are true on screen).
+export function separateSpots(spots: Spot[], aspect: number, minGap = 0.09, maxShift = 0.05): Spot[] {
+  const out = spots.map((s) => ({ ...s }));
+  const clampTo = (v: number, o: number) => Math.min(o + maxShift, Math.max(o - maxShift, Math.min(0.97, Math.max(0.03, v))));
+  for (let iter = 0; iter < 24; iter++) {
+    let moved = false;
+    for (let i = 0; i < out.length; i++) {
+      for (let j = i + 1; j < out.length; j++) {
+        const a = out[i], b = out[j];
+        const dx = b.x - a.x;
+        const dy = (b.y - a.y) / aspect;
+        const d = Math.hypot(dx, dy);
+        if (d >= minGap) continue;
+        const [ux, uy] = d > 1e-6 ? [dx / d, dy / d] : [1, 0];
+        const push = (minGap - d) / 2;
+        a.x = clampTo(a.x - ux * push, spots[i].x);
+        a.y = clampTo(a.y - uy * push * aspect, spots[i].y);
+        b.x = clampTo(b.x + ux * push, spots[j].x);
+        b.y = clampTo(b.y + uy * push * aspect, spots[j].y);
+        moved = true;
+      }
+    }
+    if (!moved) break;
+  }
+  return out;
+}
+
 const KEY = "roomspeak.scene.v1";
+const HANDOFF_KEY = "roomspeak.handoff.seen";
+
+export function handoffSeen(): boolean {
+  try {
+    return localStorage.getItem(HANDOFF_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function markHandoffSeen(): void {
+  try {
+    localStorage.setItem(HANDOFF_KEY, "1");
+  } catch {
+    // shown again next time; harmless
+  }
+}
 
 // The one saved scene. Anything missing or malformed counts as "no scene" → Setup.
 export function loadScene(storage: Storage | undefined = globalThis.localStorage): Scene | null {

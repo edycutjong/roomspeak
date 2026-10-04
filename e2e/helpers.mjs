@@ -47,3 +47,14 @@ export function check(cond, msg) {
   if (!cond) throw new Error(`FAIL: ${msg}`);
   console.log(`ok - ${msg}`);
 }
+
+// First entry into Speak shows a one-time caregiver card; dismiss it if present.
+export async function dismissHandoff(page) {
+  const ok = page.getByRole("button", { name: /Mengerti|Got it/ });
+  if (await ok.isVisible().catch(() => false)) await ok.click();
+}
+
+// Open a spot row (hears it and reveals Ubah / Hapus).
+export async function openRow(page, i) {
+  await page.getByTestId("spot-row").nth(i).locator(".spot__main").click();
+}
