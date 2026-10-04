@@ -1,0 +1,83 @@
+{
+ "run_at": "2026-10-04T19:00:11+0700",
+ "endpoint": "http://localhost:5173/api/detect (build/api/detect.ts via vite dev middleware)",
+ "photo": "assets/plates/room.jpg (1536x1024, AI-generated)",
+ "lang": "id",
+ "http": 200,
+ "seconds": 3.73,
+ "response": {
+  "spots": [
+   {
+    "label": "teko",
+    "phrase": "Boleh minta tolong buatkan teh?",
+    "box": [
+     501,
+     575,
+     708,
+     685
+    ]
+   },
+   {
+    "label": "radio",
+    "phrase": "Tolong nyalakan radionya, mau dengar.",
+    "box": [
+     342,
+     295,
+     416,
+     386
+    ]
+   },
+   {
+    "label": "kursi",
+    "phrase": "Saya mau duduk istirahat sebentar.",
+    "box": [
+     378,
+     762,
+     999,
+     1000
+    ]
+   },
+   {
+    "label": "kipas angin",
+    "phrase": "Tolong nyalakan kipasnya, gerah.",
+    "box": [
+     151,
+     878,
+     497,
+     997
+    ]
+   },
+   {
+    "label": "jendela",
+    "phrase": "Tolong buka jendelanya, mau udara segar.",
+    "box": [
+     0,
+     0,
+     498,
+     65
+    ]
+   },
+   {
+    "label": "toples kue",
+    "phrase": "Boleh minta camilannya?",
+    "box": [
+     553,
+     472,
+     674,
+     537
+    ]
+   },
+   {
+    "label": "alat bantu jalan",
+    "phrase": "Tolong ambilkan alat bantu jalan saya.",
+    "box": [
+     358,
+     714,
+     822,
+     875
+    ]
+   }
+  ],
+  "model": "gemini-3.1-flash-lite"
+ }
+}
