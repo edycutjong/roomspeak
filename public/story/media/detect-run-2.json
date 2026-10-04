@@ -1,7 +1,7 @@
 {
  "run_at": "2026-10-04T19:00:11+0700",
- "endpoint": "http://localhost:5173/api/detect (build/api/detect.ts via vite dev middleware)",
- "photo": "assets/plates/room.jpg (1536x1024, AI-generated)",
+ "endpoint": "POST /api/detect (api/detect.ts), run against a local dev server",
+ "photo": "the AI-generated room photo on this page (1536x1024 original; media/room-1536.jpg is a re-encoded copy)",
  "lang": "id",
  "http": 200,
  "seconds": 3.73,

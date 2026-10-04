@@ -483,8 +483,8 @@ h2 .line{display:block}
   <div class="receipts" id="receipts">
     <div class="rc"><div class="rc__n"><span data-count="8">8</span></div><div class="rc__l">things ringed from one photo, at most</div><a class="rc__p" href="https://github.com/edycutjong/roomspeak/blob/main/shared/validate.ts">shared/validate.ts</a></div>
     <div class="rc"><div class="rc__n"><span data-count="4.48" data-dec="2">4.48</span><small>s</small></div><div class="rc__l">from photo sent to answer back, in the recorded call below</div><a class="rc__p" href="media/detect-run.json">media/detect-run.json</a></div>
-    <div class="rc"><div class="rc__n"><span data-count="17">17</span></div><div class="rc__l">unit tests: validation, box to ring, hit testing, storage</div><a class="rc__p" href="https://github.com/edycutjong/roomspeak/tree/main/tests">tests/</a></div>
-    <div class="rc"><div class="rc__n"><span data-count="34">34</span></div><div class="rc__l">checks in a real browser: speaking, editing, saving, failing</div><a class="rc__p" href="https://github.com/edycutjong/roomspeak/tree/main/e2e">e2e/</a></div>
+    <div class="rc"><div class="rc__n"><span data-count="25">25</span></div><div class="rc__l">automated tests: ring maths, storage, the fallback ladder, no API key in the browser</div><a class="rc__p" href="https://github.com/edycutjong/roomspeak/tree/main/tests">tests/</a></div>
+    <div class="rc"><div class="rc__n"><span data-count="46">46</span></div><div class="rc__l">checks in a real browser: speaking, editing, saving, failing, example rooms</div><a class="rc__p" href="https://github.com/edycutjong/roomspeak/tree/main/e2e">e2e/</a></div>
   </div>
 </section>
 
@@ -544,7 +544,7 @@ h2 .line{display:block}
     </div>
     <div class="tablet"><div class="screen">
       <img src="media/speak-kettle.jpg" width="1600" height="1112" loading="lazy" alt="Speak mode on a tablet: the room dimmed, the kettle lit inside an enlarged terracotta ring, and five large core-word buttons along the bottom: Ya, Tidak, Tolong, Sakit, Toilet.">
-      <!-- hotspots: positions measured from the running app at 1180×820 (assets/landing/measure-core.mjs) -->
+      <!-- hotspots: positions measured in the running app at 1180×820 (Playwright, getBoundingClientRect) -->
       <button class="hot hot--ring" data-say="Aku mau kopi" data-gloss="I'd like coffee." aria-label="Kettle in the screenshot: Aku mau kopi, I'd like coffee"></button>
       <button class="hot hot--core" style="--l:.847%" data-say="Ya" data-gloss="Yes.">Ya</button>
       <button class="hot hot--core" style="--l:20.644%" data-say="Tidak" data-gloss="No.">Tidak</button>
@@ -577,7 +577,7 @@ h2 .line{display:block}
       <div class="handover__btns">
         <button class="btn btn--primary" data-open="id">Open in Bahasa Indonesia</button>
         <button class="btn btn--quiet" data-open="en">Open in English</button>
-        <small>Saves this room in this browser, the way the app does, then opens the app. You'll be asked before it replaces a room you already saved.</small>
+        <small>Saves this room in this browser, the way the app does, then opens the app. You'll be asked before it replaces a room you already saved. Or open the app and tap one of its four example rooms.</small>
       </div>
     </div>
   </div>
@@ -589,7 +589,7 @@ h2 .line{display:block}
     <p class="lede" style="margin:0">Six frames from the running app, in order: the recorded answer replayed, the kettle edited through the app's own editor, nothing drawn by hand.</p>
   </div>
   <div class="sheet">
-    <figure class="frame"><img src="media/phone-first-open.jpg" width="540" height="1169" loading="lazy" alt="First open: a welcome line, a language choice and one button to take or choose a room photo."><figcaption><b><span class="fn">1</span>First open</b>“Satu foto ruangannya…”</figcaption></figure>
+    <figure class="frame"><img src="media/phone-first-open.jpg" width="540" height="1169" loading="lazy" alt="First open: a welcome line, a language choice, one button to take or choose a room photo, and four example rooms labelled as AI-generated."><figcaption><b><span class="fn">1</span>First open</b>a photo, or one of 4 example rooms</figcaption></figure>
     <figure class="frame"><img src="media/phone-looking.jpg" width="540" height="1169" loading="lazy" alt="The photo with a calm Mencari benda (looking for objects) indicator."><figcaption><b><span class="fn">2</span>Looking</b>“Mencari benda…”</figcaption></figure>
     <figure class="frame"><img src="media/phone-setup-view.jpg" width="540" height="1169" loading="lazy" alt="Setup: seven numbered rings on the photo and the list of phrases, with the Selesai (done) button."><figcaption><b><span class="fn">3</span>Seven rings</b>hear, edit, remove, add</figcaption></figure>
     <figure class="frame"><img src="media/phone-handoff.jpg" width="540" height="1169" loading="lazy" alt="A one-time card for the caregiver, Siap dipakai (ready to use), explaining the 2-second hold."><figcaption><b><span class="fn">4</span>Ready to use</b>shown once, to the caregiver</figcaption></figure>
@@ -711,6 +711,7 @@ h2 .line{display:block}
   <h2 id="h-faq">Questions a judge would ask.</h2>
   <div class="faq">
     <details><summary>Does it work without the internet?<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p>Speaking runs on the device: the tap, the device's voice and the saved scene. The internet is needed once, during setup, when Gemini looks at the photo. The app isn't installable for offline use yet; that's on the scope's "later" list.</p></details>
+    <details><summary>Can I try it without a photo of a room?<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p>Yes. The app's first screen offers four example rooms, labelled as AI-generated; tapping one runs the real setup on that photo. Or use the button further up this page to open this room, already set up.</p></details>
     <details><summary>Where does the photo go?<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p>Once to the app's own detect helper, which asks Gemini for the objects and keeps the API key off the device. The scene (photo, rings, phrases) is then kept only in this browser's storage. No account, no server database.</p></details>
     <details><summary>What if Gemini rings the wrong things?<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p>The caregiver removes, rewrites or adds spots by hand: a new spot is a tap on the photo and a typed phrase. If the AI finds nothing or the request fails, Setup says so plainly and adding spots still works. The five core words work with zero spots.</p></details>
     <details><summary>What if the device has no Indonesian voice?<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></summary><p>Setup tells the caregiver once, and Speak mode shows the phrase in large text when a spot is tapped. Android Chrome and iOS Safari ship an Indonesian voice. English is available at setup.</p></details>
