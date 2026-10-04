@@ -29,7 +29,7 @@ Build mode: fast (learner: "no question to me, do as your recommendation")
   Learner check: Tap Selesai, tap the kettle (or any ring), and hear the phrase. Try the core row. Hold the corner button to go back.
   Commit: `Speak mode with tappable rings and core row`
 
-- [ ] **3. The caregiver can correct every spot**
+- [x] **3. The caregiver can correct every spot**
   Becomes usable: In Setup, each spot can be heard, its phrase edited, or removed; "Tambah titik" adds a ring where the caregiver taps and asks for a phrase; at most 12 spots.
   Why now: Detection will be imperfect on real rooms; correction is what makes the scene trustworthy and is the fallback if the spike is weak.
   PRD ref: `prd.md > Scene setup`
@@ -79,3 +79,4 @@ Activity mode:
 - Added `e2e/` Playwright scripts as the per-slice mechanical verification of the running app.
 - Rings reveal one by one only in Setup — in Speak mode the replayed animation left rings invisible for the first moments, which would hide targets from him.
 - Early hands-on checkpoint folded into the final kick-the-tires session — the learner asked for no interruptions; the loop still needs their hands-on check before the build is called done.
+- Language toggle locks once a photo is chosen (changing it means choosing a new photo) — the phrases come back in the chosen language, so switching afterwards would mix an English voice with Indonesian phrases.

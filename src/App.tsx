@@ -30,6 +30,7 @@ export default function App() {
       status={status}
       onLang={setLang}
       onPhoto={handlePhoto}
+      onSpots={(spots) => setScene((s) => s && { ...s, spots })}
       onDone={() => setMode("speak")}
     />
   );
