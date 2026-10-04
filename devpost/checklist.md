@@ -81,3 +81,4 @@ Activity mode:
 - Early hands-on checkpoint folded into the final kick-the-tires session — the learner asked for no interruptions; the loop still needs their hands-on check before the build is called done.
 - Language toggle locks once a photo is chosen (changing it means choosing a new photo) — the phrases come back in the chosen language, so switching afterwards would mix an English voice with Indonesian phrases.
 - Storage failure is shown once in Setup and a second Selesai continues with the in-memory scene — Speak mode must stay text-free, so the warning cannot live there.
+- detect treats timeouts like overload and moves to the next model, 12 s per model within a 50 s budget — the final real-API run timed out on the primary model and the timeout escaped the retry loop; benchmarks showed `gemini-3.1-flash-lite` answering in ~3 s with accurate boxes.

@@ -143,7 +143,7 @@ build/
 - **Payload:** `contents[0].parts = [{inline_data: {mime_type: "image/jpeg", data}}, {text: prompt}]`; `generationConfig = {responseMimeType: "application/json", responseSchema, temperature: 0.2}`.
 - **Response:** `candidates[0].content.parts[0].text` holds a JSON array of `{label, phrase, box_2d, confidence}`, where `box_2d = [ymin, xmin, ymax, xmax]` normalized to 0–1000.
 - **Docs:** https://ai.google.dev/gemini-api/docs/image-understanding · https://ai.google.dev/gemini-api/docs/structured-output
-- **Limits and cost:** one call per setup. Free-tier rate limits are far above demo needs. Gemini sometimes answers 503 "high demand", so detect retries the primary model once, then falls back to `gemini-3.5-flash`, then `gemini-3.1-flash-lite`.
+- **Limits and cost:** one call per setup. Free-tier rate limits are far above demo needs. Gemini sometimes answers 503 "high demand", or stalls, so detect gives each model 12 s and falls back from `gemini-3.8-flash` to `gemini-3.1-flash-lite` (fast; boxes accurate, picks a little more trivial) to `gemini-3.6-flash`, all within a 50 s budget.
 
 ### Vercel (optional hosting)
 Serverless function plus static hosting; free tier is enough. https://vercel.com/docs/functions
