@@ -21,7 +21,7 @@
          media/phone-*.jpg ........... real phone captures (first open, Setup, kettle)
          media/detect-run.json ....... the recorded /api/detect response every number on the cover comes from
          media/icon.svg .............. the app's mark (build/public/icon.svg)
-  VERSION v0.0.0-dev — `git -C build describe --tags` finds no tag yet.
+  VERSION v0.1.0 — `git -C build describe --tags --abbrev=0` (the repo's latest tag).
 -->
 <script>
   if (location.protocol.startsWith("http") && location.pathname.endsWith("/deck")) location.replace(location.pathname + "/" + location.search + location.hash);
@@ -86,7 +86,8 @@ code,.mono{font-family:var(--font-data)}
 .slide::before{content:"";position:absolute;inset:-30% -30% 20% -40%;pointer-events:none;z-index:0;
   background:repeating-linear-gradient(118deg,rgba(120,92,64,.06) 0 80px,rgba(255,247,234,1) 80px 150px,rgba(120,92,64,.06) 150px 300px);
   -webkit-mask:radial-gradient(ellipse 60% 70% at 12% 6%,#000 12%,transparent 72%);mask:radial-gradient(ellipse 60% 70% at 12% 6%,#000 12%,transparent 72%)}
-.slide>*{position:relative;z-index:1}
+.slide>section{display:contents}
+.slide>section>*{position:relative;z-index:1}
 .speaker-notes{display:none}
 .stamp{position:absolute!important;left:128px;bottom:46px;display:flex;align-items:center;gap:14px;font:700 19px var(--font-body);color:var(--muted)}
 .stamp img{width:34px;height:34px;border-radius:9px}
@@ -142,7 +143,7 @@ code,.mono{font-family:var(--font-data)}
 /* 1 · cover */
 .s1 .mark{position:absolute;left:128px;top:88px;width:76px;height:76px;border-radius:20px;box-shadow:0 14px 30px -14px rgba(47,43,40,.6)}
 .s1 .badge{position:absolute;left:228px;top:100px}
-.s1 .h{position:absolute;left:128px;top:208px;font-size:108px;line-height:1.02;width:1700px}
+.s1 .h{position:absolute;left:128px;top:214px;font-size:96px;line-height:1.04;width:1700px} /* master.md headline scale 72-96px */
 .s1 .h>span{display:block}
 .s1 .print{left:906px;top:470px;width:820px;transform:rotate(1deg)}
 .s1 .said{position:absolute;left:128px;top:540px;width:720px}
@@ -218,7 +219,7 @@ code,.mono{font-family:var(--font-data)}
 .s9 .strip img:nth-child(2){margin-top:60px}.s9 .strip img:nth-child(3){margin-top:120px}
 
 /* 10 · the ask */
-.s10 .h{font-size:136px;line-height:1}
+.s10 .h{font-size:96px;line-height:1.04}
 .s10 .h>span{display:block}
 .s10 .sub{margin-top:40px;font-size:34px;max-width:21em}
 .s10 .qrbox{position:absolute;right:128px;top:150px;width:460px;padding:36px;background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:0 40px 80px -40px rgba(47,43,40,.6)}
@@ -334,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <div class="notes-panel" id="notes-panel" aria-live="polite"></div>
   <div class="stage" id="stage">
 
-<section class="slide s1 is-active" data-title="Cover" aria-label="Slide 1: When the words won't come, his room speaks for him">
+<div class="slide s1 is-active" data-title="Cover" role="group" aria-roledescription="slide" aria-label="Slide 1: When the words won't come, his room speaks for him"><section>
   <img class="mark" src="media/icon.svg" alt="Room to Speak: a dimmed room with one kettle lit inside a terracotta ring" width="76" height="76">
   <span class="badge contrast-check">Built for Build With AI: Basics · Devpost</span>
   <h1 class="h contrast-check"><span>When the words won't come,</span><span>his room <span class="spoken">speaks for him.</span></span></h1>
@@ -346,18 +347,18 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
   <div class="said"><q lang="id">Aku mau kopi.</q><span>I'd like coffee.</span></div>
   <div class="payload" aria-label="The recorded detect call"><span class="pl"><span class="k">/api/detect →</span> 7 spots <span class="k">·</span> 4.48 s <span class="k">·</span> gemini-3.1-flash-lite</span></div>
-  <div class="stamp"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s2" data-title="Hook" aria-label="Slide 2: He understands everything. The words won't come.">
+<div class="slide s2" data-title="Hook" role="group" aria-roledescription="slide" aria-label="Slide 2: He understands everything. The words won't come."><section>
   <h2 class="h contrast-check"><span>He understands everything.</span><span class="quiet">The words won't come.</span></h2>
   <p class="sub contrast-check">A parent with aphasia after a stroke, at home with family.</p>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s3" data-title="Problem" aria-label="Slide 3: The hospital card isn't his life">
+<div class="slide s3" data-title="Problem" role="group" aria-roledescription="slide" aria-label="Slide 3: The hospital card isn't his life"><section>
   <h2 class="h contrast-check">The hospital card isn't his life.</h2>
   <div class="card" aria-label="A generic communication card"><span>MAKAN</span><span>MINUM</span><span>TOILET</span><span>SAKIT</span></div>
   <p class="cap cardcap contrast-check">The generic card (scope.md)</p>
@@ -369,22 +370,22 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
   <p class="lbl roomcap contrast-check">His room</p>
   <p class="sub contrast-check">Boards made from his own room need every object outlined by hand.</p>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s4" data-title="Solution" aria-label="Slide 4: One photo becomes a voice">
+<div class="slide s4" data-title="Solution" role="group" aria-roledescription="slide" aria-label="Slide 4: One photo becomes a voice"><section>
   <h2 class="h contrast-check">One photo becomes a voice.</h2>
   <div class="device phone"><img src="media/phone-setup-view.jpg" alt="Setup on a phone: seven numbered rings and the list of phrases" width="540" height="1169"></div>
   <div class="device tab"><img src="media/speak-kettle.jpg" alt="Speak mode on a tablet: the room dimmed, the kettle lit, the five core words along the bottom" width="1600" height="1112"></div>
   <p class="lbl lbl1 contrast-check">Setup · caregiver</p>
   <p class="sub contrast-check">The caregiver photographs his room once. Gemini rings up to <b>8</b> things and drafts a phrase for each.</p>
   <p class="lbl note contrast-check">Speak · him</p>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s5" data-title="How it works" aria-label="Slide 5: Online once. On the device after.">
+<div class="slide s5" data-title="How it works" role="group" aria-roledescription="slide" aria-label="Slide 5: Online once. On the device after."><section>
   <h2 class="h contrast-check">Online once. On the device after.</h2>
   <svg viewBox="0 0 1664 600" style="height:660px" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Architecture: Setup sends the photo once through /api/detect to Gemini, validates the answer and turns boxes into rings saved on the device; Speak turns a tap into the nearest ring and the device voice.">
     <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1l8 4-8 4" fill="none" stroke="#9C8E81" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
@@ -411,14 +412,14 @@ document.addEventListener("DOMContentLoaded", () => {
     <g stroke="#9C8E81" stroke-width="3" fill="none" marker-end="url(#ah)">
       <path d="M226 148h46"/><path d="M428 148h48"/><path d="M838 148h20"/><path d="M1034 148h52"/><path d="M1322 148h46"/>
       <path d="M296 460h50"/><path d="M602 460h50"/><path d="M1078 460h50"/>
-      <path d="M1501 198v80q0 26-26 26H190q-26 0-26 26v76" stroke-dasharray="8 8"/>
+      <path d="M1501 198v80q0 26-26 26H302q-26 0-26 26v76" stroke-dasharray="8 8"/>
     </g>
   </svg>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s6" data-title="Live demo" aria-label="Slide 6: Rings, one fix, his voice">
+<div class="slide s6" data-title="Live demo" role="group" aria-roledescription="slide" aria-label="Slide 6: Rings, one fix, his voice"><section>
   <h2 class="h contrast-check">Rings, one fix, his voice.</h2>
   <div class="three">
     <figure>
@@ -437,11 +438,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <figcaption><span class="n">3</span><span class="lbl contrast-check">One tap: <span class="spoken" lang="id">Aku mau kopi</span></span></figcaption>
     </figure>
   </div>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s7" data-title="Built for one hand" aria-label="Slide 7: Built for one hand, one room">
+<div class="slide s7" data-title="Built for one hand" role="group" aria-roledescription="slide" aria-label="Slide 7: Built for one hand, one room"><section>
   <h2 class="h contrast-check">Built for one hand, one room.</h2>
   <ul>
     <li class="contrast-check"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="20" r="12"/><circle cx="24" cy="20" r="3.5"/><path d="M24 35v8M19 39l5 4 5-4"/></svg>Taps count on release.</li>
@@ -451,11 +452,11 @@ document.addEventListener("DOMContentLoaded", () => {
     <li class="contrast-check"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="11" y="6" width="26" height="36" rx="5"/><path d="M20 36h8"/></svg>No account, no server storage.</li>
   </ul>
   <div class="phonewrap"><div class="device"><img src="media/phone-speak-kettle.jpg" alt="Speak mode on a phone, kettle lit" width="540" height="1169"></div></div>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s8" data-title="Why now" aria-label="Slide 8: One call does the outlining">
+<div class="slide s8" data-title="Why now" role="group" aria-roledescription="slide" aria-label="Slide 8: One call does the outlining"><section>
   <div class="crop">
     <svg viewBox="790 440 420 400" role="img" aria-label="The kettle in his room: Gemini's box as a dashed rectangle, the app's ring as a terracotta circle at its centre">
       <image href="media/room-1536.jpg" x="0" y="0" width="1536" height="1024" preserveAspectRatio="none"/>
@@ -472,11 +473,11 @@ document.addEventListener("DOMContentLoaded", () => {
     <h2 class="h contrast-check">One call does the outlining.</h2>
     <p class="sub contrast-check">Gemini returns a box and a phrase per object, in one structured answer.</p>
   </div>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s9" data-title="Shipped" aria-label="Slide 9: Four slices, each one verified">
+<div class="slide s9" data-title="Shipped" role="group" aria-roledescription="slide" aria-label="Slide 9: Four slices, each one verified"><section>
   <h2 class="h contrast-check">Four slices, each one verified.</h2>
   <ul class="check">
     <li class="contrast-check"><svg viewBox="0 0 62 62" aria-hidden="true"><circle cx="31" cy="31" r="26" fill="none" stroke="#C8643B" stroke-width="5"/><path d="M19 32l8 8 16-17" fill="none" stroke="#B5532C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>Photo → rings</li>
@@ -486,19 +487,19 @@ document.addEventListener("DOMContentLoaded", () => {
   </ul>
   <p class="receipt contrast-check"><b>17</b> unit tests · <b>34</b> browser checks · live at <b>roomspeak.edycu.dev</b></p>
   <div class="strip" aria-hidden="true"><img src="media/phone-first-open.jpg" alt="" width="540" height="1169"><img src="media/phone-setup-view.jpg" alt="" width="540" height="1169"><img src="media/phone-speak-kettle.jpg" alt="" width="540" height="1169"></div>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
-<section class="slide s10" data-title="The ask" aria-label="Slide 10: Try it in a real room">
+<div class="slide s10" data-title="The ask" role="group" aria-roledescription="slide" aria-label="Slide 10: Try it in a real room"><section>
   <h2 class="h contrast-check"><span>Try it in</span><span>a real room.</span></h2>
   <p class="sub contrast-check">Photograph a room on a phone or tablet. Tap what you'd say.</p>
-  <p class="src contrast-check">github.com/edycutjong/room-to-speak · MIT</p>
+  <p class="src contrast-check">github.com/edycutjong/roomspeak · MIT · <a href="https://github.com/edycutjong/roomspeak/releases/tag/v0.1.0">v0.1.0</a></p>
   <div class="qrbox"><svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR code for roomspeak.edycu.dev"><path fill="#2F2B28" d="M0 0h7v1h-7zM9 0h2v1h-2zM12 0h1v1h-1zM15 0h2v1h-2zM19 0h2v1h-2zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM12 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM19 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h2v1h-2zM16 3h3v1h-3zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM13 4h3v1h-3zM17 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h2v1h-2zM11 5h7v1h-7zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h2v1h-2zM15 7h1v1h-1zM18 7h1v1h-1zM0 8h1v1h-1zM2 8h5v1h-5zM9 8h2v1h-2zM12 8h1v1h-1zM14 8h2v1h-2zM17 8h1v1h-1zM19 8h2v1h-2zM22 8h5v1h-5zM0 9h1v1h-1zM2 9h2v1h-2zM7 9h6v1h-6zM15 9h2v1h-2zM18 9h3v1h-3zM22 9h3v1h-3zM28 9h1v1h-1zM0 10h1v1h-1zM3 10h10v1h-10zM21 10h1v1h-1zM23 10h2v1h-2zM1 11h3v1h-3zM7 11h1v1h-1zM9 11h4v1h-4zM14 11h1v1h-1zM16 11h1v1h-1zM18 11h1v1h-1zM20 11h1v1h-1zM22 11h2v1h-2zM25 11h1v1h-1zM27 11h1v1h-1zM0 12h1v1h-1zM2 12h1v1h-1zM4 12h3v1h-3zM8 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM16 12h2v1h-2zM25 12h2v1h-2zM2 13h1v1h-1zM7 13h1v1h-1zM10 13h1v1h-1zM12 13h4v1h-4zM18 13h3v1h-3zM22 13h3v1h-3zM28 13h1v1h-1zM1 14h1v1h-1zM4 14h1v1h-1zM6 14h3v1h-3zM11 14h1v1h-1zM13 14h4v1h-4zM20 14h2v1h-2zM23 14h1v1h-1zM25 14h2v1h-2zM0 15h3v1h-3zM8 15h1v1h-1zM11 15h3v1h-3zM15 15h1v1h-1zM20 15h2v1h-2zM23 15h1v1h-1zM27 15h1v1h-1zM0 16h2v1h-2zM3 16h2v1h-2zM6 16h2v1h-2zM9 16h2v1h-2zM14 16h2v1h-2zM17 16h1v1h-1zM25 16h2v1h-2zM0 17h2v1h-2zM3 17h1v1h-1zM5 17h1v1h-1zM10 17h1v1h-1zM15 17h2v1h-2zM19 17h6v1h-6zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM5 18h3v1h-3zM11 18h1v1h-1zM17 18h1v1h-1zM23 18h1v1h-1zM26 18h1v1h-1zM0 19h1v1h-1zM2 19h1v1h-1zM5 19h1v1h-1zM7 19h5v1h-5zM14 19h1v1h-1zM16 19h1v1h-1zM18 19h3v1h-3zM23 19h1v1h-1zM27 19h1v1h-1zM0 20h1v1h-1zM3 20h2v1h-2zM6 20h1v1h-1zM8 20h4v1h-4zM16 20h1v1h-1zM18 20h7v1h-7zM26 20h3v1h-3zM8 21h1v1h-1zM12 21h4v1h-4zM17 21h2v1h-2zM20 21h1v1h-1zM24 21h5v1h-5zM0 22h7v1h-7zM10 22h2v1h-2zM13 22h5v1h-5zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h3v1h-3zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM15 23h1v1h-1zM17 23h2v1h-2zM20 23h1v1h-1zM24 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM14 24h2v1h-2zM20 24h5v1h-5zM26 24h3v1h-3zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM8 25h1v1h-1zM11 25h1v1h-1zM15 25h2v1h-2zM18 25h3v1h-3zM25 25h2v1h-2zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM8 26h3v1h-3zM12 26h2v1h-2zM18 26h1v1h-1zM20 26h8v1h-8zM0 27h1v1h-1zM6 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM16 27h1v1h-1zM20 27h2v1h-2zM25 27h1v1h-1zM27 27h1v1h-1zM0 28h7v1h-7zM8 28h2v1h-2zM11 28h1v1h-1zM13 28h2v1h-2zM16 28h1v1h-1zM18 28h2v1h-2zM24 28h3v1h-3z"/></svg><p class="contrast-check">roomspeak.edycu.dev</p></div>
   <div class="closer"><q lang="id">Aku mau kopi.</q><span>I'd like coffee.</span></div>
-  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.0.0-dev</span></div>
+  <div class="stamp"><img src="media/icon.svg" alt="" width="34" height="34"><span>v0.1.0</span></div>
   <aside class="speaker-notes"></aside>
-</section>
+</section></div>
 
   </div>
 </div>

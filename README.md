@@ -46,13 +46,13 @@ A proof of concept of a **visual scene display**: an AAC tool (augmentative and 
 
 ## 🧭 How it works
 
-```
-Setup (once)                                   Speak (every day, on-device, offline)
-photo ─► shrink to ≤1600px ─► POST /api/detect ─► Gemini (structured JSON: label, phrase, box_2d)
-                                    │
-                                    └─► validate ─► box → ring (center, radius) ─► nudge overlaps apart
-tap ─► ring under the finger (on release) ─► speechSynthesis (id-ID) ─► ring pulses while speaking
-```
+**Setup happens once and is the only step that needs the internet; everything he does every day runs on the device.**
+
+<details>
+<summary><b>Show the diagram and the details</b></summary>
+<br>
+
+<img src="docs/assets/how-it-works.png" width="100%" alt="How Room to Speak works. Setup, once, by the caregiver: 1 one room photo, 2 shrink in the browser, 3 POST /api/detect on a Vercel function where the API keys live, 4 vision model ladder gemini-3.8-flash then gemini-3.1-flash-lite then deepseek-flash within 55 seconds, 5 validate the answer, 6 box to ring, 7 caregiver reviews, 8 save the scene in localStorage. Speak, every day, on the device: A he taps an object, B nearest ring wins, C device voice speaks in id-ID, D the room dims and the object stays lit. Core words Ya, Tidak, Tolong, Sakit, Toilet are always on screen.">
 
 - **`api/detect.ts`** — the only server code. Keeps API keys off the device, asks for structured JSON, validates every item, and walks a fallback ladder within a 55 s budget when a model is busy or slow. A provider without a key is skipped:
 
@@ -68,6 +68,8 @@ tap ─► ring under the finger (on release) ─► speechSynthesis (id-ID) ─
 - **`src/scene.ts`** — one scene in `localStorage`; nothing is stored on a server.
 
 A one-page code guide lives in [`devpost/app-map.html`](devpost/app-map.html).
+
+</details>
 
 ## 🚀 Try it locally
 
