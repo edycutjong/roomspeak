@@ -1,5 +1,5 @@
 {
   "functions": {
-    "api/detect.ts": { "maxDuration": 90 }
+    "api/detect.ts": { "maxDuration": 70 }
   }
 }

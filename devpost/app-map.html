@@ -93,7 +93,7 @@
   <h2>To change this, start here</h2>
   <details><summary>The words on the core row (Ya / Tidak / Tolong / Sakit / Toilet)</summary><p><code>src/copy.ts</code> → <code>CORE_WORDS</code>. <code>label</code> is the button, <code>phrase</code> is what gets spoken.</p></details>
   <details><summary>What the AI looks for, or how the phrases sound</summary><p><code>shared/prompt.ts</code> → <code>buildPrompt</code>. The answer format is <code>RESPONSE_SCHEMA</code>; answers are checked in <code>shared/validate.ts</code>.</p></details>
-  <details><summary>Which AI models are tried, in what order, and how long each gets</summary><p><code>api/detect.ts</code> → <code>ATTEMPTS</code> (Gemini → Gemini Flash-Lite → DeepSeek → OpenAI, each with its own <code>ms</code>), <code>TOTAL_BUDGET_MS</code>, loop in <code>findSpots</code>.</p></details>
+  <details><summary>Which AI models are tried, in what order, and how long each gets</summary><p><code>api/detect.ts</code> → <code>ATTEMPTS</code> (Gemini → Gemini Flash-Lite → DeepSeek, each with its own <code>ms</code>), <code>TOTAL_BUDGET_MS</code>, loop in <code>findSpots</code>.</p></details>
   <details><summary>Ring size and placement</summary><p><code>src/scene.ts</code> → <code>boxToSpot</code> (box → ring) and <code>separateSpots</code> (nudges overlapping rings apart). Look in <code>src/styles.css</code> → <code>.ring</code> for how they're drawn.</p></details>
   <details><summary>Any screen text in Indonesian or English</summary><p><code>src/copy.ts</code> → <code>COPY.id</code> / <code>COPY.en</code>.</p></details>
 

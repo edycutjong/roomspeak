@@ -4,7 +4,7 @@ import { buildPrompt, JSON_OBJECT_SUFFIX, RESPONSE_SCHEMA, type Lang } from "../
 import { parseModelJson, validateSpots } from "../shared/validate";
 
 const MAX_BODY_CHARS = 4_000_000;
-const TOTAL_BUDGET_MS = 80_000; // stays under the browser's 90 s wait and the function's maxDuration
+const TOTAL_BUDGET_MS = 55_000; // stays under the browser's 70 s wait and the function's maxDuration
 
 type Attempt = {
   name: string;
@@ -28,7 +28,7 @@ async function gemini(model: string, image: string, lang: Lang, key: string, sig
   return typeof text === "string" ? JSON.parse(text) : [];
 }
 
-// Any OpenAI-compatible chat endpoint (OpenRouter, OpenAI) with image input and a JSON-object answer.
+// Any OpenAI-compatible chat endpoint (here: DeepSeek's own API) with image input and a JSON-object answer.
 async function chat(url: string, model: string, extra: object, image: string, lang: Lang, key: string, signal: AbortSignal) {
   const res = await fetch(url, {
     method: "POST",
@@ -49,25 +49,18 @@ async function chat(url: string, model: string, extra: object, image: string, la
   return typeof text === "string" ? parseModelJson(text) : [];
 }
 
-const OPENROUTER = "https://openrouter.ai/api/v1/chat/completions";
-const OPENAI = "https://api.openai.com/v1/chat/completions";
+const DEEPSEEK = "https://api.deepseek.com/chat/completions";
 
 // Fallback ladder, ordered by box accuracy measured on the same rooms (see README):
-// Gemini is the most precise and fast; DeepSeek is accurate but slower; OpenAI is fastest but its boxes are looser.
+// Gemini is the most precise and fast; DeepSeek's own API (V4.1 Flash, low effort) is a close, slightly looser second.
 // Providers without a configured key are skipped.
 const ATTEMPTS: Attempt[] = [
   { name: process.env.GEMINI_MODEL || "gemini-3.8-flash", ms: 12_000, key: () => process.env.GEMINI_API_KEY,
     run: (i, l, k, s) => gemini(process.env.GEMINI_MODEL || "gemini-3.8-flash", i, l, k, s) },
   { name: "gemini-3.1-flash-lite", ms: 10_000, key: () => process.env.GEMINI_API_KEY,
     run: (i, l, k, s) => gemini("gemini-3.1-flash-lite", i, l, k, s) },
-  { name: "deepseek/deepseek-v4.1-flash", ms: 35_000, key: () => process.env.OPENROUTER_API_KEY,
-    run: (i, l, k, s) => chat(OPENROUTER, "deepseek/deepseek-v4.1-flash", {}, i, l, k, s) },
-  // ChatGPT through the same OpenRouter key when it exists (one key covers both fallbacks), else OpenAI directly.
-  process.env.OPENROUTER_API_KEY
-    ? { name: "openai/gpt-5.4-mini", ms: 15_000, key: () => process.env.OPENROUTER_API_KEY,
-        run: (i, l, k, s) => chat(OPENROUTER, "openai/gpt-5.4-mini", { reasoning: { effort: "low" } }, i, l, k, s) }
-    : { name: "gpt-5.4-mini", ms: 15_000, key: () => process.env.OPENAI_API_KEY,
-        run: (i, l, k, s) => chat(OPENAI, "gpt-5.4-mini", { reasoning_effort: "low" }, i, l, k, s) },
+  { name: "deepseek-flash", ms: 25_000, key: () => process.env.DEEPSEEK_API_KEY,
+    run: (i, l, k, s) => chat(DEEPSEEK, "deepseek-flash", { reasoning_effort: "low" }, i, l, k, s) },
 ];
 
 async function findSpots(image: string, lang: Lang) {
@@ -93,7 +86,7 @@ function json(status: number, body: unknown): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  if (!ATTEMPTS.some((a) => a.key())) return json(500, { error: "Server has no AI provider key (GEMINI_API_KEY, OPENROUTER_API_KEY or OPENAI_API_KEY)." });
+  if (!ATTEMPTS.some((a) => a.key())) return json(500, { error: "Server has no AI provider key (GEMINI_API_KEY or DEEPSEEK_API_KEY)." });
 
   const text = await request.text();
   if (text.length > MAX_BODY_CHARS) return json(413, { error: "Photo is too large." });
