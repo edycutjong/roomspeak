@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Room to Speak — his own room becomes his voice. Tap the kettle: the room dims to charcoal, the kettle stays lit inside its terracotta ring, saying “Aku mau kopi.”">
+<!-- STORYBOARD (dur 6s — must equal this file's single master dur)
+  0-10%   steady state: his room at rest on the dim plate — window, light shaft, the kettle lit in its
+          terracotta ring with a white halo. The static mark, complete: this is the poster.
+  10-25%  trigger:      a tap lands on the kettle — a white touch-dot blooms on it          data-story="beat-2"
+  25-55%  mechanism:    Tap the kettle: the room dims to charcoal, the kettle stays lit inside its terracotta ring, saying “Aku mau kopi.”   data-story="beat-3"
+                        (window + shaft fade and a charcoal veil deepens the plate 24-30%, ring swells to its speaking size,
+                         the lit disc brightens, white ripples leave the ring every 14% ≈ the app's 1.1 s ripple)
+  55-80%  resolution:   the ring holds its speaking size; the voice keeps leaving it in ripples   data-story="beat-4"
+  80-100% breathe + seam fade: last ripple ends 85%, the room comes back 84-94%, the ring settles;
+          98% ≡ 2% so the restart never cuts.
+  keyTimes trace: 0.12/0.14/0.22/0.24 = beat 2 · 0.24/0.30 = beat 3 onset · 0.84/0.94 = seam return
+-->
+  <title>Room to Speak</title>
+  <defs>
+    <style>
+      .plate  { fill: var(--primary, #2F2B28); }
+      .edge   { fill: none; stroke: var(--bg, #F7F3EE); stroke-opacity: 0.14; stroke-width: 4; }
+      .room   { fill: none; stroke: var(--bg, #F7F3EE); stroke-opacity: 0.2; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+      .shaft  { fill: var(--bg, #F7F3EE); fill-opacity: 0.05; }
+      .lit    { fill: url(#lit); }
+      .tint   { fill: url(#tint); }
+      .kettle { fill: var(--primary, #2F2B28); }
+      .handle { fill: none; stroke: var(--primary, #2F2B28); stroke-width: 10; stroke-linecap: round; }
+      .ring   { fill: none; stroke: var(--accent, #C8643B); }
+      .halo   { fill: none; stroke: #FFFFFF; stroke-width: 11; }
+      .ripple { fill: none; stroke: #FFFFFF; stroke-opacity: 0.42; stroke-width: 7; }
+      .wave   { fill: none; stroke: #FFFFFF; stroke-width: 6; }
+      .glow   { fill: none; stroke: var(--accent, #C8643B); stroke-width: 26; }
+
+      /* story layer — every keyframe runs on the 6 s master (hard rule 4) */
+      [data-story] { transform-box: fill-box; transform-origin: center; }
+      .wave { animation: wave 6s linear infinite; }
+      .wave--b { animation-name: wave-b; }
+      .wave--c { animation-name: wave-c; }
+      .wave--d { animation-name: wave-d; }
+      .glow  { animation: glow 6s linear infinite; }
+      @keyframes wave   { 0%, 27.4% { opacity: 0; transform: scale(1); } 27.5% { opacity: 0.85; transform: scale(1); } 44.5% { opacity: 0; transform: scale(1.42); } 100% { opacity: 0; transform: scale(1.42); } }
+      @keyframes wave-b { 0%, 40.9% { opacity: 0; transform: scale(1); } 41% { opacity: 0.85; transform: scale(1); } 58% { opacity: 0; transform: scale(1.42); } 100% { opacity: 0; transform: scale(1.42); } }
+      @keyframes wave-c { 0%, 54.4% { opacity: 0; transform: scale(1); } 54.5% { opacity: 0.85; transform: scale(1); } 71.5% { opacity: 0; transform: scale(1.42); } 100% { opacity: 0; transform: scale(1.42); } }
+      @keyframes wave-d { 0%, 67.9% { opacity: 0; transform: scale(1); } 68% { opacity: 0.85; transform: scale(1); } 85% { opacity: 0; transform: scale(1.42); } 100% { opacity: 0; transform: scale(1.42); } }
+      @keyframes glow   { 0%, 25% { opacity: 0; } 32% { opacity: 0.7; } 50% { opacity: 0.38; } 66% { opacity: 0.7; } 82% { opacity: 0.38; } 92%, 100% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+    </style>
+    <radialGradient id="lit" cx="0.42" cy="0.36" r="0.75">
+      <stop offset="0" style="stop-color: var(--card, #FFFDF9)"/>
+      <stop offset="1" style="stop-color: var(--bg, #F7F3EE)"/>
+    </radialGradient>
+    <radialGradient id="tint" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.74" style="stop-color: var(--accent, #C8643B); stop-opacity: 0"/>
+      <stop offset="1" style="stop-color: var(--accent, #C8643B); stop-opacity: 0.2"/>
+    </radialGradient>
+    <clipPath id="plate-clip"><rect width="512" height="512" rx="112"/></clipPath>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+
+  <rect class="plate" width="512" height="512" rx="112"/>
+  <g clip-path="url(#plate-clip)">
+    <!-- his room: present at rest, sinks to charcoal while the kettle speaks -->
+    <g>
+      <animate attributeName="opacity" values="1;1;0.12;0.12;1;1" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+      <path class="shaft" d="M158 70 L188 70 L420 470 L330 470 Z"/>
+      <path class="shaft" d="M158 132 L176 132 L330 470 L280 470 Z"/>
+      <rect class="room" x="58" y="58" width="100" height="122" rx="14"/>
+      <path class="room" d="M108 58 V180 M58 119 H158"/>
+    </g>
+    <!-- the plate is already the dim (it is his screen in Speak mode), so the room needs a deeper
+         charcoal to visibly sink while one object speaks; disc, ring and ripples draw above it -->
+    <rect width="512" height="512" fill="#000000" opacity="0" data-story="beat-3">
+      <animate attributeName="opacity" values="0;0;0.45;0.45;0;0" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+
+    <circle class="glow" cx="296" cy="300" r="166" filter="url(#soft)" opacity="0" data-story="beat-3"/>
+
+    <!-- the one object that speaks: lit inside its ring -->
+    <circle class="lit" cx="296" cy="300" r="120"/>
+    <circle cx="296" cy="300" r="120" fill="#FFFFFF" opacity="0" data-story="beat-3">
+      <animate attributeName="opacity" values="0;0;0.4;0.4;0;0" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <g transform="translate(317 310)">
+      <path class="handle" d="M-44 -14 C-44 -94 44 -94 44 -14"/>
+      <circle class="kettle" cx="0" cy="-45" r="9"/>
+      <path class="kettle" d="M-40 -23 C-35 -38 35 -38 40 -23 Z"/>
+      <rect class="kettle" x="-49" y="-23" width="98" height="9" rx="4.5"/>
+      <path class="kettle" d="M-46 -10 L46 -10 C52 12 60 38 62 54 Q63 66 50 66 L-50 66 Q-63 66 -62 54 C-60 38 -52 12 -46 -10 Z"/>
+      <path class="kettle" d="M-58 57 C-81 55 -98 33 -107 -2 L-91 -10 C-85 14 -73 30 -52 30 Z"/>
+    </g>
+    <circle class="tint" cx="296" cy="300" r="120"/>
+
+    <!-- the tap -->
+    <circle cx="300" cy="306" r="6" fill="#FFFFFF" opacity="0" data-story="beat-2">
+      <animate attributeName="r" values="6;6;34;34" keyTimes="0;0.12;0.22;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.12;0.14;0.24;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- the ring swells to its speaking size, as the shipped active ring does: thicker and scaled -->
+    <circle class="ring" cx="296" cy="300" r="131" stroke-width="22">
+      <animate attributeName="r" values="131;131;136;136;131;131" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-width" values="22;22;30;30;22;22" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle class="halo" cx="296" cy="300" r="147.5">
+      <animate attributeName="r" values="147.5;147.5;156.5;156.5;147.5;147.5" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- the resting ripple of the mark hands over to the live ripples while it speaks -->
+    <circle class="ripple" cx="296" cy="300" r="170">
+      <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.24;0.28;0.86;0.94;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle class="wave" cx="296" cy="300" r="162" opacity="0" data-story="beat-3"/>
+    <circle class="wave wave--b" cx="296" cy="300" r="162" opacity="0" data-story="beat-3"/>
+    <circle class="wave wave--c" cx="296" cy="300" r="162" opacity="0" data-story="beat-4"/>
+    <circle class="wave wave--d" cx="296" cy="300" r="162" opacity="0" data-story="beat-4"/>
+  </g>
+  <!-- the frame of his screen holds while the room inside it sinks: keeps the silhouette on dark pages -->
+  <rect class="edge" x="2" y="2" width="508" height="508" rx="110">
+    <animate attributeName="stroke-opacity" values="0.14;0.14;0.32;0.32;0.14;0.14" keyTimes="0;0.24;0.3;0.84;0.94;1" dur="6s" repeatCount="indefinite"/>
+  </rect>
+</svg>

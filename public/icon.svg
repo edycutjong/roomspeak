@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Room to Speak — his own room becomes his voice: the room dims to charcoal and the kettle stays lit inside its terracotta ring">
+  <title>Room to Speak</title>
+  <defs>
+    <style>
+      .plate  { fill: var(--primary, #2F2B28); }
+      .edge   { fill: none; stroke: var(--bg, #F7F3EE); stroke-opacity: 0.14; stroke-width: 4; }
+      .room   { fill: none; stroke: var(--bg, #F7F3EE); stroke-opacity: 0.2; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+      .shaft  { fill: var(--bg, #F7F3EE); fill-opacity: 0.05; }
+      .lit    { fill: url(#lit); }
+      .tint   { fill: url(#tint); }
+      .kettle { fill: var(--primary, #2F2B28); }
+      .handle { fill: none; stroke: var(--primary, #2F2B28); stroke-width: 10; stroke-linecap: round; }
+      .ring   { fill: none; stroke: var(--accent, #C8643B); stroke-width: 22; }
+      .halo   { fill: none; stroke: #FFFFFF; stroke-width: 11; }
+      .ripple { fill: none; stroke: #FFFFFF; stroke-opacity: 0.42; stroke-width: 7; }
+    </style>
+    <radialGradient id="lit" cx="0.42" cy="0.36" r="0.75">
+      <stop offset="0" style="stop-color: var(--card, #FFFDF9)"/>
+      <stop offset="1" style="stop-color: var(--bg, #F7F3EE)"/>
+    </radialGradient>
+    <radialGradient id="tint" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.74" style="stop-color: var(--accent, #C8643B); stop-opacity: 0"/>
+      <stop offset="1" style="stop-color: var(--accent, #C8643B); stop-opacity: 0.2"/>
+    </radialGradient>
+    <clipPath id="plate-clip"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+
+  <!-- the dimmed room: his screen in Speak mode -->
+  <rect class="plate" width="512" height="512" rx="112"/>
+  <g clip-path="url(#plate-clip)">
+    <path class="shaft" d="M158 70 L188 70 L420 470 L330 470 Z"/>
+    <path class="shaft" d="M158 132 L176 132 L330 470 L280 470 Z"/>
+    <rect class="room" x="58" y="58" width="100" height="122" rx="14"/>
+    <path class="room" d="M108 58 V180 M58 119 H158"/>
+
+    <!-- the one object that speaks: lit inside its ring -->
+    <circle class="lit" cx="296" cy="300" r="120"/>
+    <g transform="translate(317 310)">
+      <path class="handle" d="M-44 -14 C-44 -94 44 -94 44 -14"/>
+      <circle class="kettle" cx="0" cy="-45" r="9"/>
+      <path class="kettle" d="M-40 -23 C-35 -38 35 -38 40 -23 Z"/>
+      <rect class="kettle" x="-49" y="-23" width="98" height="9" rx="4.5"/>
+      <path class="kettle" d="M-46 -10 L46 -10 C52 12 60 38 62 54 Q63 66 50 66 L-50 66 Q-63 66 -62 54 C-60 38 -52 12 -46 -10 Z"/>
+      <path class="kettle" d="M-58 57 C-81 55 -98 33 -107 -2 L-91 -10 C-85 14 -73 30 -52 30 Z"/>
+    </g>
+    <circle class="tint" cx="296" cy="300" r="120"/>
+    <circle class="ring" cx="296" cy="300" r="131"/>
+    <circle class="halo" cx="296" cy="300" r="147.5"/>
+    <circle class="ripple" cx="296" cy="300" r="170"/>
+  </g>
+  <rect class="edge" x="2" y="2" width="508" height="508" rx="110"/>
+</svg>
