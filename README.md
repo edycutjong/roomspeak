@@ -44,7 +44,9 @@ tap ─► ring under the finger (on release) ─► speechSynthesis (id-ID) ─
   | 1 | `gemini-3.8-flash` | tightest boxes, ~4–12 s |
   | 2 | `gemini-3.1-flash-lite` | accurate boxes, ~3–10 s, picks slightly more trivial objects |
   | 3 | `deepseek/deepseek-v4.1-flash` (OpenRouter) | good boxes, ~15–60 s |
-  | 4 | `gpt-5.4-mini` (OpenAI) | fastest (~4 s), looser boxes — last resort; the caregiver can fix spots |
+  | 4 | `gpt-5.4-mini` (via OpenRouter, or OpenAI directly) | fastest (~4 s), looser boxes — last resort; the caregiver can fix spots |
+
+  Free OpenRouter vision models were tested too and left out: on the same rooms they were rate-limited or timed out on most calls.
 - **`src/components/PhotoStage.tsx`** — the photo at its own aspect ratio with rings as real, labelled buttons. A tap counts on release inside the same ring it started in; a second finger cancels it (resting palms don't speak).
 - **`src/speech.ts`** — device voice, interrupt-then-speak, large-text fallback when no matching voice exists.
 - **`src/scene.ts`** — one scene in `localStorage`; nothing is stored on a server.
@@ -58,7 +60,7 @@ Requires Node 22+ and a [Gemini API key](https://aistudio.google.com/apikey).
 ```bash
 npm install
 GEMINI_API_KEY=your-key npm run dev        # or put it in .env.local (see .env.example)
-# optional fallbacks: OPENROUTER_API_KEY (DeepSeek) and OPENAI_API_KEY
+# optional fallbacks: OPENROUTER_API_KEY (DeepSeek + GPT-5.4 mini), or OPENAI_API_KEY for GPT only
 # open http://localhost:5173 — add `-- --host` to try it on a phone on the same wifi
 ```
 

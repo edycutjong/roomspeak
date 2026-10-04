@@ -62,8 +62,12 @@ const ATTEMPTS: Attempt[] = [
     run: (i, l, k, s) => gemini("gemini-3.1-flash-lite", i, l, k, s) },
   { name: "deepseek/deepseek-v4.1-flash", ms: 35_000, key: () => process.env.OPENROUTER_API_KEY,
     run: (i, l, k, s) => chat(OPENROUTER, "deepseek/deepseek-v4.1-flash", {}, i, l, k, s) },
-  { name: "gpt-5.4-mini", ms: 15_000, key: () => process.env.OPENAI_API_KEY,
-    run: (i, l, k, s) => chat(OPENAI, "gpt-5.4-mini", { reasoning_effort: "low" }, i, l, k, s) },
+  // ChatGPT through the same OpenRouter key when it exists (one key covers both fallbacks), else OpenAI directly.
+  process.env.OPENROUTER_API_KEY
+    ? { name: "openai/gpt-5.4-mini", ms: 15_000, key: () => process.env.OPENROUTER_API_KEY,
+        run: (i, l, k, s) => chat(OPENROUTER, "openai/gpt-5.4-mini", { reasoning: { effort: "low" } }, i, l, k, s) }
+    : { name: "gpt-5.4-mini", ms: 15_000, key: () => process.env.OPENAI_API_KEY,
+        run: (i, l, k, s) => chat(OPENAI, "gpt-5.4-mini", { reasoning_effort: "low" }, i, l, k, s) },
 ];
 
 async function findSpots(image: string, lang: Lang) {
