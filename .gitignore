@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+node_modules/
+__pycache__/
+.next/
+dist/
+coverage/
+.DS_Store
+
+# agent tooling installed by `npx skills add` - never public (root CLAUDE.md git rule 3)
+.claude/
+.agents/
+.cursor/
+AGENTS.md
+CLAUDE.md
+devpost/learner-profile.md
+agent/
