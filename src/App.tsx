@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Lang } from "../shared/prompt";
 import { SetupScreen, type SetupStatus } from "./components/SetupScreen";
+import { SpeakScreen } from "./components/SpeakScreen";
 import { detectSpots } from "./detect-client";
 import { preparePhoto } from "./image";
 import { boxToSpot, type Scene } from "./scene";
@@ -9,6 +10,7 @@ export default function App() {
   const [lang, setLang] = useState<Lang>("id");
   const [scene, setScene] = useState<Scene | null>(null);
   const [status, setStatus] = useState<SetupStatus>("idle");
+  const [mode, setMode] = useState<"setup" | "speak">("setup");
 
   async function handlePhoto(file: File) {
     const photo = await preparePhoto(file);
@@ -19,6 +21,8 @@ export default function App() {
     setStatus("ready");
   }
 
+  if (mode === "speak" && scene) return <SpeakScreen scene={scene} onExit={() => setMode("setup")} />;
+
   return (
     <SetupScreen
       lang={lang}
@@ -26,7 +30,7 @@ export default function App() {
       status={status}
       onLang={setLang}
       onPhoto={handlePhoto}
-      onDone={() => {}}
+      onDone={() => setMode("speak")}
     />
   );
 }

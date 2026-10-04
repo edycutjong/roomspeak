@@ -19,7 +19,7 @@ Build mode: fast (learner: "no question to me, do as your recommendation")
   Learner check: Run `npm run dev`, open http://localhost:5173, choose a photo of your room, and see whether the rings land on things he'd want to talk about.
   Commit: `Detect objects in a room photo and show rings`
 
-- [ ] **2. Tap a ring and the device speaks for him**
+- [x] **2. Tap a ring and the device speaks for him**
   Becomes usable: Tap Selesai and the photo goes full-screen. Tapping a ring speaks its phrase and the ring pulses. The core row speaks Ya / Tidak / Tolong / Sakit / Toilet. A 2-second hold on the corner button returns to Setup.
   Why now: Completes the core loop end to end (photo → spots → voice), so the early feedback is about the real experience.
   PRD ref: `prd.md > Speaking`, `prd.md > Core row`, `prd.md > Screens and Layout`
@@ -51,7 +51,7 @@ Build mode: fast (learner: "no question to me, do as your recommendation")
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — after slice 2 (full photo → tap → voice loop)
+- [ ] Early usable behavior explored — moved to the final session (learner asked to run without pauses); not yet done
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
@@ -77,4 +77,5 @@ Activity mode:
 - detect falls back across models on overload — the first real call through the helper hit Gemini 503 "high demand"; with retry plus fallback, setup took 16–24 s in testing, so the calm "looking" state matters.
 - Rings capped smaller (radius ≤ 8% of photo width) and numbered in Setup — the first screenshot showed oversized, overlapping rings on a phone-width photo.
 - Added `e2e/` Playwright scripts as the per-slice mechanical verification of the running app.
-
+- Rings reveal one by one only in Setup — in Speak mode the replayed animation left rings invisible for the first moments, which would hide targets from him.
+- Early hands-on checkpoint folded into the final kick-the-tires session — the learner asked for no interruptions; the loop still needs their hands-on check before the build is called done.

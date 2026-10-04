@@ -10,10 +10,11 @@ type Props = {
   onTap?: (fx: number, fy: number, width: number, height: number) => void;
   className?: string;
   numbered?: boolean; // Setup shows the list number inside each ring
+  reveal?: boolean; // rings appear one by one (Setup); Speak shows them at once
 };
 
 // The photo kept at its own aspect ratio, so ring positions are plain percentages of it.
-export function PhotoStage({ photo, aspect, spots, activeId, onTap, className = "", numbered = false }: Props) {
+export function PhotoStage({ photo, aspect, spots, activeId, onTap, className = "", numbered = false, reveal = false }: Props) {
   function handlePointer(e: PointerEvent<HTMLDivElement>) {
     if (!onTap) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -31,7 +32,7 @@ export function PhotoStage({ photo, aspect, spots, activeId, onTap, className = 
         {spots.map((s, i) => (
           <span
             key={s.id}
-            className={`ring${s.id === activeId ? " ring--active" : ""}`}
+            className={`ring${reveal ? " ring--reveal" : ""}${s.id === activeId ? " ring--active" : ""}`}
             data-testid="ring"
             data-phrase={s.phrase}
             style={

@@ -16,3 +16,4 @@ AGENTS.md
 CLAUDE.md
 devpost/learner-profile.md
 agent/
+*.tsbuildinfo

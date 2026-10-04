@@ -41,7 +41,7 @@ export function SetupScreen({ lang, scene, status, onLang, onPhoto, onDone }: Pr
 
       {scene && (
         <section className="setup__photo">
-          <PhotoStage photo={scene.photo} aspect={scene.aspect} spots={scene.spots} numbered />
+          <PhotoStage photo={scene.photo} aspect={scene.aspect} spots={scene.spots} numbered reveal />
           {status === "looking" && (
             <div className="looking" role="status">
               <span className="looking__dot" /> {t.looking}
