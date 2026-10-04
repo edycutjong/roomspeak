@@ -1,7 +1,7 @@
 // POST /api/detect — room photo in, validated talk-about spots out.
 // Runs as a Vercel function in production and through Vite middleware locally.
-import { buildPrompt, JSON_OBJECT_SUFFIX, RESPONSE_SCHEMA, type Lang } from "../shared/prompt";
-import { parseModelJson, validateSpots } from "../shared/validate";
+import { buildPrompt, JSON_OBJECT_SUFFIX, RESPONSE_SCHEMA, type Lang } from "../shared/prompt.js";
+import { parseModelJson, validateSpots } from "../shared/validate.js";
 
 const MAX_BODY_CHARS = 4_000_000;
 const TOTAL_BUDGET_MS = 55_000; // stays under the browser's 70 s wait and the function's maxDuration

@@ -17,3 +17,6 @@ CLAUDE.md
 devpost/learner-profile.md
 agent/
 *.tsbuildinfo
+
+# Vercel CLI link (local only)
+.vercel
