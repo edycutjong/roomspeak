@@ -6,6 +6,8 @@
 
 **One photo of his room becomes a voice he can tap.**
 
+**[Try it live → roomspeak.edycu.dev](https://roomspeak.edycu.dev)**
+
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="On a tablet, a living room photo dims while the kettle stays lit inside its terracotta ring and says “Aku mau kopi.”">
 
 ![React](https://img.shields.io/badge/React-19-2F2B28?logo=react&logoColor=white)
