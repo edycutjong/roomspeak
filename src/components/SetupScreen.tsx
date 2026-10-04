@@ -23,7 +23,7 @@ type Props = {
 // Example rooms (AI-generated) so anyone can try the app without photographing a room first.
 const SAMPLES = ["bedroom", "living", "dining", "kitchen"] as const;
 
-function SamplePicker({ title, note, labels, onFile }: { title: string; note: string; labels: string[]; onFile: (f: File) => void }) {
+function SamplePicker({ title, note, labels, onFile, compact = false }: { title: string; note: string; labels: string[]; onFile: (f: File) => void; compact?: boolean }) {
   const [loading, setLoading] = useState<string | null>(null);
   async function pick(name: string) {
     setLoading(name);
@@ -35,8 +35,8 @@ function SamplePicker({ title, note, labels, onFile }: { title: string; note: st
     }
   }
   return (
-    <section className="samples" aria-labelledby="samples-title">
-      <h2 id="samples-title" className="samples__title">{title}</h2>
+    <section className={`samples${compact ? " samples--compact" : ""}`} aria-label={title}>
+      <h2 className="samples__title">{title}</h2>
       <div className="samples__grid">
         {SAMPLES.map((name, i) => (
           <button key={name} className="sample" onClick={() => pick(name)} disabled={!!loading} data-testid={`sample-${name}`}>
@@ -185,6 +185,17 @@ export function SetupScreen({ lang, scene, status, storageFailed, onLang, onPhot
               }}
             />
           </div>
+          <SamplePicker
+            title={t.samplesTitle}
+            note={t.samplesNote}
+            labels={t.samples.split("|")}
+            compact
+            onFile={(f) => {
+              setConfirmReplace(false);
+              setSelectedId(null);
+              onPhoto(f);
+            }}
+          />
         </div>
       )}
 
