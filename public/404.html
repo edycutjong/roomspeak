@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2F2B28">
+<meta name="robots" content="noindex">
+<title>Halaman tidak ditemukan · Room to Speak</title>
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<style>
+  :root { --bg:#f7f3ee; --card:#fffdf9; --ink:#2f2b28; --muted:#6f665f; --line:#e6ded4; --accent:#c8643b; --accent-ink:#b5532c; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(200,100,59,.28); }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px;
+    background: var(--bg); color: var(--ink);
+    font: 600 18px/1.5 "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { width: 100%; max-width: 520px; text-align: center; }
+  .mark { position: relative; width: 168px; height: 168px; margin: 0 auto 28px; }
+  .mark svg { width: 100%; height: 100%; }
+  .ring { fill: none; stroke: var(--accent); stroke-width: 6; }
+  .halo { fill: none; stroke: #fff; stroke-width: 5; }
+  .ripple { fill: none; stroke: var(--accent); stroke-width: 3; opacity: 0; transform-origin: 84px 84px; animation: ripple 2.4s cubic-bezier(.16,1,.3,1) infinite; }
+  .q { fill: var(--accent-ink); font: 800 64px/1 "Nunito", system-ui, sans-serif; }
+  @keyframes ripple { 0% { opacity: .7; transform: scale(.9); } 100% { opacity: 0; transform: scale(1.35); } }
+  @media (prefers-reduced-motion: reduce) { .ripple { animation: none; } }
+  h1 { font-size: clamp(28px, 7vw, 38px); line-height: 1.25; font-weight: 800; letter-spacing: -.01em; margin: 0 0 10px; text-wrap: balance; }
+  p { margin: 0 auto 8px; max-width: 42ch; color: var(--muted); }
+  .en { font-size: 15px; }
+  nav { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+  a { text-decoration: none; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 22px; border-radius: 999px;
+    font-weight: 800; transition: transform .12s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active { transform: scale(.98); }
+  .primary { background: var(--accent-ink); color: #fff; box-shadow: 0 6px 16px rgba(181,83,44,.26); }
+  .primary:hover { background: #a54a26; box-shadow: 0 8px 22px rgba(181,83,44,.34); }
+  .quiet { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .quiet:hover { background: #fff; border-color: #d6cbbd; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  a:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark" aria-hidden="true">
+    <svg viewBox="0 0 168 168">
+      <circle class="ripple" cx="84" cy="84" r="62"/>
+      <circle class="halo" cx="84" cy="84" r="66"/>
+      <circle class="ring" cx="84" cy="84" r="62"/>
+      <text class="q" x="84" y="106" text-anchor="middle">?</text>
+    </svg>
+  </div>
+  <h1>Halaman ini tidak ada di ruangan.</h1>
+  <p>Alamatnya mungkin salah ketik, atau halamannya sudah pindah.</p>
+  <p class="en">This page isn't in the room. The address may be mistyped, or the page has moved.</p>
+  <nav aria-label="Pilihan">
+    <a class="btn primary" href="/">Buka Room to Speak</a>
+    <div class="pair">
+      <a class="btn quiet" href="/story/">Cerita</a>
+      <a class="btn quiet" href="/deck/">Pitch deck</a>
+    </div>
+  </nav>
+</main>
+</body>
+</html>

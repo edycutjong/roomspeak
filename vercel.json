@@ -1,5 +1,10 @@
 {
   "functions": {
     "api/detect.ts": { "maxDuration": 70 }
-  }
+  },
+  "redirects": [
+    { "source": "/story", "destination": "/story/", "permanent": true },
+    { "source": "/deck", "destination": "/deck/", "permanent": true },
+    { "source": "/judge", "destination": "/judge/", "permanent": true }
+  ]
 }

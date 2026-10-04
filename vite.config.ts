@@ -1,4 +1,6 @@
-import { defineConfig, loadEnv, type Plugin } from "vite";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { defineConfig, loadEnv, type Connect, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 
 // Serves api/detect.ts at /api/detect during `npm run dev`, so no Vercel CLI is needed locally.
@@ -31,7 +33,34 @@ function devApi(): Plugin {
   };
 }
 
+// Static pages in public/<dir>/index.html (story, deck, judge) open as themselves, not as the app.
+// "/story" redirects to "/story/" so their relative asset paths resolve. Vercel serves them the same way.
+function staticDirIndex(): Plugin {
+  const handler: Connect.NextHandleFunction = (req, res, next) => {
+    const path = (req.url ?? "").split("?")[0];
+    const m = path.match(/^\/([a-z0-9-]+)(\/?)$/);
+    if (!m || !existsSync(resolve("public", m[1], "index.html"))) return next();
+    if (!m[2]) {
+      res.statusCode = 301;
+      res.setHeader("Location", `/${m[1]}/`);
+      res.end();
+      return;
+    }
+    req.url = `/${m[1]}/index.html`;
+    next();
+  };
+  return {
+    name: "static-dir-index",
+    configureServer(server) {
+      server.middlewares.use(handler);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(handler);
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
-  return { plugins: [react(), devApi()] };
+  return { plugins: [react(), staticDirIndex(), devApi()] };
 });
