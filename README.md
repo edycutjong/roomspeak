@@ -13,6 +13,7 @@ Judging? [The 30-second path (JUDGE.md)](JUDGE.md) · [A real run, with receipts
 <img src="docs/assets/readme-hero-animated.svg" width="100%" alt="On a tablet, a living room photo dims while the kettle stays lit inside its terracotta ring and says “Aku mau kopi.”">
 
 [![Live app](https://img.shields.io/badge/🚀_Live-roomspeak.edycu.dev-B5532C?style=for-the-badge)](https://roomspeak.edycu.dev)
+[![Demo video](https://img.shields.io/badge/🎬_Demo-Video_1:48-ef4444?style=for-the-badge)](https://youtu.be/ijFneakCODk)
 [![Story](https://img.shields.io/badge/📖_Story-Landing_page-C8643B?style=for-the-badge)](https://roomspeak.edycu.dev/story/)
 [![Pitch deck](https://img.shields.io/badge/📊_Pitch-Deck-2F2B28?style=for-the-badge)](https://roomspeak.edycu.dev/deck/)
 [![Built for Devpost](https://img.shields.io/badge/Devpost-Build_With_AI:_Basics-003E54?style=for-the-badge&logo=devpost&logoColor=white)](https://learn-ai-basics.devpost.com/)
@@ -30,6 +31,8 @@ Judging? [The 30-second path (JUDGE.md)](JUDGE.md) · [A real run, with receipts
 </div>
 
 ## 🎬 See it in action
+
+**▶ [Watch the 1:48 demo on YouTube](https://youtu.be/ijFneakCODk)**
 
 <div align="center">
   <img src="docs/assets/demo.gif" width="100%" alt="Room to Speak in use: an example bedroom is picked, rings appear on the walker, medicine, radio and other objects, Selesai switches to Speak mode, and tapping the walker lights it up while the phone speaks “Aku mau jalan sebentar”; then the Toilet core word.">

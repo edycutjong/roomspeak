@@ -67,4 +67,4 @@ CI runs the tests and browser specs with detection and the device voice stubbed.
 - **Pitch deck:** [roomspeak.edycu.dev/deck](https://roomspeak.edycu.dev/deck/)
 - **Code:** [github.com/edycutjong/roomspeak](https://github.com/edycutjong/roomspeak), MIT, planning docs in [`devpost/`](devpost/)
 - **Release:** [v0.1.0](https://github.com/edycutjong/roomspeak/releases/tag/v0.1.0)
-- **Demo video:** coming soon
+- **Demo video:** [youtu.be/ijFneakCODk](https://youtu.be/ijFneakCODk) (1:48)
