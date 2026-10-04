@@ -51,24 +51,24 @@ Build mode: fast (learner: "no question to me, do as your recommendation")
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — moved to the final session (learner asked to run without pauses); not yet done
-- [ ] Final kick-the-tires exploration and feedback completed
+- [x] Early usable behavior explored — folded into the final hands-on session (learner asked to run without pauses)
+- [x] Final kick-the-tires exploration and feedback completed — learner tested the running app on their own (2026-10-04): "that was great"; no changes requested
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Final review complete — no revisions requested; learner moved on to shipping ("that was great … so, what is next")
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — brief evidence-based recap (learner asked for no extra exercises)
+- [x] Optional edit and transfer reflection addressed — not run; learner asked to proceed without questions
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence:
-Route and stops:
-Edit outcome:
-Reflection:
-Activity mode:
+Activity and evidence: recap of the detect timeout fix — spec failure mode → real-API e2e run failed → `api/detect.ts` askGemini fix (commit 863498a).
+Route and stops: reference-only route in the map — PhotoStage.tsx `up`, geometry.ts `nearestRing`, speech.ts `useSpeaker`.
+Edit outcome: not applicable (no edit offered).
+Reflection: not offered (learner standing instruction: no questions).
+Activity mode: recap.
 
 ## Revisions
 
