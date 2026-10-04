@@ -19,6 +19,14 @@
 
 </div>
 
+## 🎬 See it in action
+
+<div align="center">
+  <img src="docs/assets/demo.gif" width="100%" alt="Room to Speak in use: an example bedroom is picked, rings appear on the walker, medicine, radio and other objects, Selesai switches to Speak mode, and tapping the walker lights it up while the phone speaks “Aku mau jalan sebentar”; then the Toilet core word.">
+</div>
+
+> **Example room → rings on what he'd talk about → one tap speaks.** Real AI output on an AI-generated example bedroom (detection answered by `deepseek-flash`; the wait is trimmed and the GIF has no sound — on a phone the device voice speaks each phrase).
+
 ## 💬 What it does
 
 A proof of concept of a **visual scene display**: an AAC tool (augmentative and alternative communication) built from a photo of the user's own surroundings, for adults with **aphasia** after a stroke who understand everything but can't find the words.
