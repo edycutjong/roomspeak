@@ -104,6 +104,15 @@ button, input, label { font: inherit; color: inherit; }
   position: absolute; left: 50%; top: 14px; transform: translateX(-50%);
   background: var(--accent); color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 15px; white-space: nowrap;
 }
+.notice {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 12px; font-size: 16px; line-height: 1.45;
+}
+.notice p, p.notice { margin: 0; }
+.notice--warn { border-color: #e7b9a5; background: #fbefe8; }
+.note--voice { background: #fbefe8; border-radius: 12px; padding: 10px 14px; color: #8a4a2f; }
+.picker { display: flex; flex-direction: column; }
+.picker .btn { width: 100%; }
 .add-form { display: flex; flex-direction: column; gap: 10px; }
 .add-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }

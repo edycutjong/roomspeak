@@ -39,7 +39,7 @@ Build mode: fast (learner: "no question to me, do as your recommendation")
   Learner check: Remove one wrong spot, rename one, add one the AI missed, then tap them in Speak mode.
   Commit: `Edit, remove and add spots in setup`
 
-- [ ] **4. The scene survives reopening, and every awkward state is handled**
+- [x] **4. The scene survives reopening, and every awkward state is handled**
   Becomes usable: Close and reopen and it goes straight to Speak with the saved scene. First open goes to Setup. Nothing found, request failure (Coba lagi), missing voice and replace-photo confirmation all show calm, plain messages.
   Why now: Persistence and failure states only make sense once the full loop exists; they turn the demo into something a family could actually leave on a tablet.
   PRD ref: `prd.md > States and Boundaries`, `prd.md > Language`
@@ -80,3 +80,4 @@ Activity mode:
 - Rings reveal one by one only in Setup — in Speak mode the replayed animation left rings invisible for the first moments, which would hide targets from him.
 - Early hands-on checkpoint folded into the final kick-the-tires session — the learner asked for no interruptions; the loop still needs their hands-on check before the build is called done.
 - Language toggle locks once a photo is chosen (changing it means choosing a new photo) — the phrases come back in the chosen language, so switching afterwards would mix an English voice with Indonesian phrases.
+- Storage failure is shown once in Setup and a second Selesai continues with the in-memory scene — Speak mode must stay text-free, so the warning cannot live there.

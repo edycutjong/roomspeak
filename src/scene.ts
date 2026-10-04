@@ -27,3 +27,37 @@ export function boxToSpot(box: Box, label: string, phrase: string, aspect: numbe
   const r = Math.min(0.08, Math.max(0.03, 0.3 * Math.min(boxW, boxHInWidthUnits)));
   return { id: newId(), label, phrase, x: (xmin + xmax) / 2, y: (ymin + ymax) / 2, r, source: "ai" };
 }
+
+const KEY = "roomspeak.scene.v1";
+
+// The one saved scene. Anything missing or malformed counts as "no scene" → Setup.
+export function loadScene(storage: Storage | undefined = globalThis.localStorage): Scene | null {
+  try {
+    const raw = storage?.getItem(KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    const ok =
+      s?.version === 1 &&
+      (s.lang === "id" || s.lang === "en") &&
+      typeof s.photo === "string" && s.photo.startsWith("data:image/") &&
+      typeof s.aspect === "number" && s.aspect > 0 &&
+      Array.isArray(s.spots) &&
+      s.spots.every(
+        (p: Spot) =>
+          typeof p?.id === "string" && typeof p.phrase === "string" &&
+          [p.x, p.y, p.r].every((n) => typeof n === "number" && Number.isFinite(n)),
+      );
+    return ok ? (s as Scene) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveScene(scene: Scene, storage: Storage | undefined = globalThis.localStorage): boolean {
+  try {
+    storage!.setItem(KEY, JSON.stringify(scene));
+    return true;
+  } catch {
+    return false;
+  }
+}

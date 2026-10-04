@@ -1,24 +1,50 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Lang } from "../shared/prompt";
 import { SetupScreen, type SetupStatus } from "./components/SetupScreen";
 import { SpeakScreen } from "./components/SpeakScreen";
 import { detectSpots } from "./detect-client";
 import { preparePhoto } from "./image";
-import { boxToSpot, type Scene } from "./scene";
+import { boxToSpot, loadScene, saveScene, type Scene } from "./scene";
 
 export default function App() {
-  const [lang, setLang] = useState<Lang>("id");
-  const [scene, setScene] = useState<Scene | null>(null);
-  const [status, setStatus] = useState<SetupStatus>("idle");
-  const [mode, setMode] = useState<"setup" | "speak">("setup");
+  const [saved] = useState(loadScene);
+  const [lang, setLang] = useState<Lang>(saved?.lang ?? "id");
+  const [scene, setScene] = useState<Scene | null>(saved);
+  const [status, setStatus] = useState<SetupStatus>(saved ? "ready" : "idle");
+  const [mode, setMode] = useState<"setup" | "speak">(saved ? "speak" : "setup");
+  const [storageFailed, setStorageFailed] = useState(false);
+  const lastPhoto = useRef<{ base64: string; aspect: number } | null>(null);
+  const run = useRef(0);
+
+  async function detect() {
+    const photo = lastPhoto.current;
+    if (!photo) return;
+    const mine = ++run.current;
+    setStatus("looking");
+    try {
+      const found = await detectSpots(photo.base64, lang);
+      if (mine !== run.current) return;
+      setScene((s) => s && { ...s, spots: found.map((d) => boxToSpot(d.box, d.label, d.phrase, photo.aspect)) });
+      setStatus("ready");
+    } catch {
+      if (mine === run.current) setStatus("failed");
+    }
+  }
 
   async function handlePhoto(file: File) {
     const photo = await preparePhoto(file);
+    lastPhoto.current = { base64: photo.base64, aspect: photo.aspect };
     setScene({ version: 1, lang, photo: photo.dataUrl, aspect: photo.aspect, spots: [] });
-    setStatus("looking");
-    const found = await detectSpots(photo.base64, lang).catch(() => []); // failure states arrive in slice 4
-    setScene((s) => s && { ...s, spots: found.map((d) => boxToSpot(d.box, d.label, d.phrase, photo.aspect)) });
-    setStatus("ready");
+    await detect();
+  }
+
+  function handleDone() {
+    if (!scene) return;
+    if (!saveScene(scene) && !storageFailed) {
+      setStorageFailed(true); // say it once; a second Done continues with the in-memory scene
+      return;
+    }
+    setMode("speak");
   }
 
   if (mode === "speak" && scene) return <SpeakScreen scene={scene} onExit={() => setMode("setup")} />;
@@ -28,10 +54,12 @@ export default function App() {
       lang={lang}
       scene={scene}
       status={status}
+      storageFailed={storageFailed}
       onLang={setLang}
       onPhoto={handlePhoto}
+      onRetry={detect}
       onSpots={(spots) => setScene((s) => s && { ...s, spots })}
-      onDone={() => setMode("speak")}
+      onDone={handleDone}
     />
   );
 }

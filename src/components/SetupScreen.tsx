@@ -7,21 +7,25 @@ import { useSpeaker } from "../speech";
 import { PhotoStage } from "./PhotoStage";
 import { SpotList } from "./SpotList";
 
-export type SetupStatus = "idle" | "looking" | "ready";
+export type SetupStatus = "idle" | "looking" | "ready" | "failed";
 
 type Props = {
   lang: Lang;
   scene: Scene | null;
   status: SetupStatus;
+  storageFailed: boolean;
   onLang: (lang: Lang) => void;
   onPhoto: (file: File) => void;
+  onRetry: () => void;
   onSpots: (spots: Spot[]) => void;
   onDone: () => void;
 };
 
-export function SetupScreen({ lang, scene, status, onLang, onPhoto, onSpots, onDone }: Props) {
+export function SetupScreen({ lang, scene, status, storageFailed, onLang, onPhoto, onRetry, onSpots, onDone }: Props) {
   const t = COPY[lang];
-  const { speak, activeKey } = useSpeaker(lang);
+  const { speak, activeKey, hasVoice } = useSpeaker(lang);
+  const [confirmReplace, setConfirmReplace] = useState(false);
+  const editable = status === "ready" || status === "failed";
   const [adding, setAdding] = useState(false);
   const [pending, setPending] = useState<{ x: number; y: number } | null>(null);
   const [draft, setDraft] = useState("");
@@ -31,6 +35,7 @@ export function SetupScreen({ lang, scene, status, onLang, onPhoto, onSpots, onD
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     e.target.value = "";
+    setConfirmReplace(false);
     if (file) onPhoto(file);
   }
 
@@ -82,7 +87,7 @@ export function SetupScreen({ lang, scene, status, onLang, onPhoto, onSpots, onD
             aspect={scene.aspect}
             spots={shown}
             activeId={activeKey}
-            onTap={status === "ready" ? handleTap : undefined}
+            onTap={editable ? handleTap : undefined}
             numbered
             reveal
           />
@@ -118,15 +123,38 @@ export function SetupScreen({ lang, scene, status, onLang, onPhoto, onSpots, onD
         </form>
       )}
 
-      {!adding && (
-        <label className={`btn ${scene ? "btn--quiet" : "btn--primary"}`}>
-          {t.pickPhoto}
-          <input type="file" accept="image/*" capture="environment" onChange={handleFile} hidden data-testid="photo-input" />
-        </label>
+      {status === "failed" && (
+        <div className="notice notice--warn" role="alert">
+          <p>{t.failed}</p>
+          <button className="btn btn--primary" onClick={onRetry}>{t.retry}</button>
+        </div>
       )}
+      {status === "ready" && spots.length === 0 && !pending && (
+        <div className="notice" role="status">
+          <p>{t.nothingFound}</p>
+        </div>
+      )}
+      {scene && !hasVoice && <p className="note note--voice">{t.noVoice}</p>}
+
+      {!adding && status !== "looking" && (confirmReplace || !scene ? (
+        <div className={scene ? "notice" : "picker"}>
+          {scene && <p>{t.replaceTitle}</p>}
+          <div className={scene ? "add-form__row" : ""}>
+            {scene && <button className="btn btn--quiet" onClick={() => setConfirmReplace(false)}>{t.cancel}</button>}
+            <label className="btn btn--primary">
+              {scene ? t.replaceConfirm : t.pickPhoto}
+              <input type="file" accept="image/*" capture="environment" onChange={handleFile} hidden data-testid="photo-input" />
+            </label>
+          </div>
+        </div>
+      ) : (
+        <button className="btn btn--quiet" onClick={() => setConfirmReplace(true)} data-testid="replace-photo">
+          {t.pickPhoto}
+        </button>
+      ))}
       {!scene && <p className="note">{t.photoNote}</p>}
 
-      {scene && status === "ready" && (
+      {scene && editable && (
         <>
           <div className="setup__listhead">
             <h2 className="setup__h2">{t.spotsTitle}</h2>
@@ -148,6 +176,7 @@ export function SetupScreen({ lang, scene, status, onLang, onPhoto, onSpots, onD
             onEdit={(id, phrase) => onSpots(spots.map((s) => (s.id === id ? { ...s, phrase } : s)))}
             onRemove={(id) => onSpots(spots.filter((s) => s.id !== id))}
           />
+          {storageFailed && <p className="notice notice--warn" role="alert">{t.storageFailed}</p>}
           <button className="btn btn--primary btn--done" onClick={onDone}>
             {t.done}
           </button>

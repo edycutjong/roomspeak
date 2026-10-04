@@ -19,6 +19,13 @@ export const COPY = {
     cancel: "Batal",
     maxReached: "Sudah 12 titik — hapus satu untuk menambah.",
     langLocked: "Ganti foto untuk mengganti bahasa.",
+    failed: "Belum berhasil mencari benda. Periksa internet, lalu coba lagi — atau tambahkan titik sendiri.",
+    retry: "Coba lagi",
+    nothingFound: "Belum ada benda yang jelas. Coba foto yang lebih terang dari sudut lain, atau tambahkan titik sendiri.",
+    noVoice: "Perangkat ini belum punya suara Bahasa Indonesia. Kalimat akan tampil sebagai tulisan besar saat disentuh.",
+    replaceTitle: "Ganti foto? Semua titik di foto ini akan dihapus.",
+    replaceConfirm: "Ganti foto",
+    storageFailed: "Tidak bisa menyimpan di perangkat ini. Adegan tetap bisa dipakai sampai halaman ditutup. Ketuk Selesai lagi untuk lanjut.",
   },
   en: {
     welcome: "One photo of his room, and the things in it can speak for him.",
@@ -38,6 +45,13 @@ export const COPY = {
     cancel: "Cancel",
     maxReached: "12 spots already — remove one to add another.",
     langLocked: "Choose a new photo to change the language.",
+    failed: "Couldn't look for objects. Check the internet and try again — or add spots yourself.",
+    retry: "Try again",
+    nothingFound: "No clear objects found. Try a brighter photo from another angle, or add spots yourself.",
+    noVoice: "This device has no English voice. Phrases will show as large text when tapped.",
+    replaceTitle: "Replace the photo? All spots on this photo will be removed.",
+    replaceConfirm: "Replace photo",
+    storageFailed: "Couldn't save on this device. The scene works until this page is closed. Tap Done again to continue.",
   },
 } satisfies Record<Lang, Record<string, string>>;
 
