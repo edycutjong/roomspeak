@@ -28,7 +28,7 @@ PRD ref: `prd.md > The Core Journey`.
 ## Stack
 Agent recommendation, accepted by the learner ("do as your recommendation").
 
-- **Vite 6 + React 19 + TypeScript** for the app: fast to build, widely documented, and the learner works through coding agents daily. https://vite.dev · https://react.dev
+- **Vite 8 + React 19 + TypeScript** for the app: fast to build, widely documented, and the learner works through coding agents daily. https://vite.dev · https://react.dev
 - **Plain CSS** (one stylesheet with CSS variables). The design is small; a CSS framework would add weight and push toward generic looks.
 - **@fontsource/nunito**, a rounded typeface bundled with the app, so it works offline. https://fontsource.org/fonts/nunito
 - **Web Speech API (`speechSynthesis`)** for the voice: built into browsers, free, instant, offline. https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
@@ -39,7 +39,7 @@ Agent recommendation, accepted by the learner ("do as your recommendation").
 
 ## Where It Runs and How Someone Tries It
 - **Runtime:** a modern mobile or desktop browser (Chrome or Safari). Node 22 for development.
-- **Key:** `GEMINI_API_KEY` as an environment variable. Locally it goes in `.env.local` (gitignored); on Vercel, in project settings. It is never in the repo.
+- **Key:** `GEMINI_API_KEY` as an environment variable, set in the shell that runs `npm run dev` (e.g. `GEMINI_API_KEY=... npm run dev`); on Vercel, in project settings. It is never written into the project folder.
 - **Local run:** `npm install` then `npm run dev` → open `http://localhost:5173`. The Vite dev server also serves `/api/detect` with the same handler file, so no Vercel account is needed locally.
 - **Tests:** `npm test`.
 - **Demo recording:** a phone-sized browser window (or a real phone on the local network via `npm run dev -- --host`), Indonesian voice, with English captions added in editing.
@@ -127,6 +127,7 @@ build/
 │   ├── prompt.ts            # Gemini prompt + response schema (used by api/)
 │   └── validate.ts          # answer validation (used by api/ and tests)
 ├── tests/                   # vitest: geometry, scene conversion, validate
+├── e2e/                     # Playwright scripts that drive the real app per slice
 ├── index.html
 ├── vite.config.ts           # React plugin + dev middleware serving api/detect.ts
 ├── package.json
@@ -142,7 +143,7 @@ build/
 - **Payload:** `contents[0].parts = [{inline_data: {mime_type: "image/jpeg", data}}, {text: prompt}]`; `generationConfig = {responseMimeType: "application/json", responseSchema, temperature: 0.2}`.
 - **Response:** `candidates[0].content.parts[0].text` holds a JSON array of `{label, phrase, box_2d, confidence}`, where `box_2d = [ymin, xmin, ymax, xmax]` normalized to 0–1000.
 - **Docs:** https://ai.google.dev/gemini-api/docs/image-understanding · https://ai.google.dev/gemini-api/docs/structured-output
-- **Limits and cost:** one call per setup. Free-tier rate limits are far above demo needs. In the smoke test the model returned 503 "high demand" occasionally, so detect retries once.
+- **Limits and cost:** one call per setup. Free-tier rate limits are far above demo needs. Gemini sometimes answers 503 "high demand", so detect retries the primary model once, then falls back to `gemini-3.5-flash`, then `gemini-3.1-flash-lite`.
 
 ### Vercel (optional hosting)
 Serverless function plus static hosting; free tier is enough. https://vercel.com/docs/functions
