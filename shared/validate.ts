@@ -24,3 +24,10 @@ export function validateSpots(raw: unknown): DetectedSpot[] {
   }
   return out;
 }
+
+// Reads a model's JSON answer: tolerates code fences and either {"spots": [...]} or a bare array.
+export function parseModelJson(text: string): unknown {
+  const clean = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+  const data = JSON.parse(clean);
+  return Array.isArray(data) ? data : data?.spots ?? [];
+}

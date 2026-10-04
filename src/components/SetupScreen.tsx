@@ -43,10 +43,19 @@ export function SetupScreen({ lang, scene, status, storageFailed, onLang, onPhot
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [confirmReplace, setConfirmReplace] = useState(false);
   const [removed, setRemoved] = useState<{ spot: Spot; index: number } | null>(null);
+  const [slow, setSlow] = useState(false);
   const spots = scene?.spots ?? [];
   const full = spots.length >= MAX_SPOTS;
   const editable = status === "ready" || status === "failed";
   const empty = editable && spots.length === 0;
+
+  // After ~15 s the primary model has likely handed over to a fallback; say so instead of looking stuck.
+  useEffect(() => {
+    setSlow(false);
+    if (status !== "looking") return;
+    const id = setTimeout(() => setSlow(true), 15_000);
+    return () => clearTimeout(id);
+  }, [status]);
 
   useEffect(() => {
     if (!removed) return;
@@ -164,7 +173,7 @@ export function SetupScreen({ lang, scene, status, storageFailed, onLang, onPhot
           />
           {status === "looking" && (
             <div className="looking" role="status">
-              <span className="looking__dot" /> {t.looking}
+              <span className="looking__dot" /> {slow ? t.lookingLong : t.looking}
             </div>
           )}
           {adding && !pending && <div className="hint" role="status">{t.addHint}</div>}

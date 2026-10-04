@@ -22,6 +22,12 @@ For each object return:
 - confidence: 0-1`;
 }
 
+// For OpenAI-compatible providers, which take a JSON object rather than Gemini's response schema.
+export const JSON_OBJECT_SUFFIX = `
+
+Return ONLY a JSON object: {"spots": [{"label": string, "phrase": string, "box_2d": [ymin, xmin, ymax, xmax], "confidence": number}]}.
+Coordinates are integers normalized to 0-1000 relative to the image height (y) and width (x).`;
+
 export const RESPONSE_SCHEMA = {
   type: "ARRAY",
   items: {

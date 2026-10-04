@@ -27,3 +27,15 @@ describe("validateSpots", () => {
     expect(validateSpots([{ phrase: "Buka jendela", box_2d: [0, 0, 10, 10] }])[0].label).toBe("Buka jendela");
   });
 });
+
+import { parseModelJson } from "../shared/validate";
+
+describe("parseModelJson", () => {
+  it("reads {spots: [...]} and bare arrays", () => {
+    expect(parseModelJson('{"spots":[{"phrase":"a"}]}')).toEqual([{ phrase: "a" }]);
+    expect(parseModelJson('[{"phrase":"a"}]')).toEqual([{ phrase: "a" }]);
+  });
+  it("strips code fences", () => {
+    expect(parseModelJson('```json\n{"spots":[]}\n```')).toEqual([]);
+  });
+});

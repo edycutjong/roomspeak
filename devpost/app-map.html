@@ -93,13 +93,13 @@
   <h2>To change this, start here</h2>
   <details><summary>The words on the core row (Ya / Tidak / Tolong / Sakit / Toilet)</summary><p><code>src/copy.ts</code> → <code>CORE_WORDS</code>. <code>label</code> is the button, <code>phrase</code> is what gets spoken.</p></details>
   <details><summary>What the AI looks for, or how the phrases sound</summary><p><code>shared/prompt.ts</code> → <code>buildPrompt</code>. The answer format is <code>RESPONSE_SCHEMA</code>; answers are checked in <code>shared/validate.ts</code>.</p></details>
-  <details><summary>Which Gemini models are tried, and how long each gets</summary><p><code>api/detect.ts</code> → <code>MODELS</code>, <code>ATTEMPT_MS</code>, <code>TOTAL_BUDGET_MS</code>, loop in <code>askGemini</code>.</p></details>
+  <details><summary>Which AI models are tried, in what order, and how long each gets</summary><p><code>api/detect.ts</code> → <code>ATTEMPTS</code> (Gemini → Gemini Flash-Lite → DeepSeek → OpenAI, each with its own <code>ms</code>), <code>TOTAL_BUDGET_MS</code>, loop in <code>findSpots</code>.</p></details>
   <details><summary>Ring size and placement</summary><p><code>src/scene.ts</code> → <code>boxToSpot</code> (box → ring) and <code>separateSpots</code> (nudges overlapping rings apart). Look in <code>src/styles.css</code> → <code>.ring</code> for how they're drawn.</p></details>
   <details><summary>Any screen text in Indonesian or English</summary><p><code>src/copy.ts</code> → <code>COPY.id</code> / <code>COPY.en</code>.</p></details>
 
   <h2>A practice to reuse</h2>
   <div class="practice">
-    <p><strong>Name the failure modes in the plan, then prove them against the real service.</strong> <code>devpost/spec.md</code> listed "Gemini busy or offline" as a failure mode with a planned fallback. The unit tests passed, but a final run of <code>e2e/slice1-detect.mjs</code> against the real API still failed: a timeout threw an error instead of returning a status, so it skipped the retry loop entirely. The fix in <code>api/detect.ts</code> (<code>askGemini</code>, commit <code>863498a</code>) treats timeouts like overload and falls back across models within one time budget.</p>
+    <p><strong>Name the failure modes in the plan, then prove them against the real service.</strong> <code>devpost/spec.md</code> listed "Gemini busy or offline" as a failure mode with a planned fallback. The unit tests passed, but a final run of <code>e2e/slice1-detect.mjs</code> against the real API still failed: a timeout threw an error instead of returning a status, so it skipped the retry loop entirely. The fix (commit <code>863498a</code>, now <code>findSpots</code> in <code>api/detect.ts</code>) treats timeouts like overload and falls back across models within one time budget.</p>
     <p>On the next project: write the two or three realistic failures into the spec, and keep one end-to-end check that runs against the real dependency — mocks only prove the paths you already imagined.</p>
   </div>
 

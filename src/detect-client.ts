@@ -10,7 +10,7 @@ export async function detectSpots(base64: string, lang: Lang): Promise<DetectedS
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ image: base64, lang }),
-      signal: AbortSignal.timeout(60_000),
+      signal: AbortSignal.timeout(90_000),
     });
   } catch {
     throw new DetectError("network");
